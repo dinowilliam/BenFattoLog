@@ -7,6 +7,11 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.navbar-brand-img {
+    width: 90% \9;
+    max-width: 90%;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -61,7 +66,10 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-image: url(../img/background.svg);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(../img/background.svg);
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: contain;
     font-family: 'Heebo', sans-serif;
     font-size: 16px;
 }
@@ -102,32 +110,6 @@ h1, h2, h3, h4, h5, h6 {
         /*font-size: 3rem;*/
     }
 }
-
-.nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
-}
-
-    .nav-scroller .nav {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-scroller .nav-link {
-        padding-top: .75rem;
-        padding-bottom: .75rem;
-        font-size: .875rem;
-    }
 
 .card-img-right {
     height: 100%;
@@ -189,3 +171,9 @@ h1, h2, h3, h4, h5, h6 {
     .blog-footer p:last-child {
         margin-bottom: 0;
     }
+
+.jumbotron {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/jumbotron1.jpg");
+    background-size: cover;
+    opacity: 1.6;
+}

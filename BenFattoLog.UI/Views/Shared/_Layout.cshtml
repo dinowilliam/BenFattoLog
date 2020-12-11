@@ -14,57 +14,40 @@
         <header class="blog-header py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-4 pt-1">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BenFattoLog</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="navbar-brand-img" src="~/img/logo.svg" alt="BenFattoLog"></a>
                 </div>
                 <div class="col-2 text-center">
 
                 </div>
                 <div class="col-6 d-flex justify-content-end align-items-center">
-                    <div class="nav-scroller py-1 mb-2">
-                        <nav class="nav d-flex justify-content-between">
-                            <a class="p-2 text-muted nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            <a class="p-2 text-muted nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            <a class="p-2 text-muted" href="#"></a>
-                            <a class="p-2 text-muted" href="#"></a>
-                            <a class="p-2 text-muted" href="#"></a>
-                            <a class="p-2 text-muted" href="#"></a>
-                        </nav>
-                    </div>
-
-                </div>
-            </div>
-        </header>
-
-
-        <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-            <div class="col-md-6 px-0">
-                <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-                <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-            </div>
-        </div>
-
-        @*<header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BenFattoLog.UI</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                        </ul>
+                        <nav class="nav d-flex justify-content-between navbar-expand-lg">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="p-2 text-muted nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="p-2 text-muted nav-link  text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Logs
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-muted text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Entrada de Log Manual</a>
+                                        <a class="dropdown-item text-muted text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Importação de Arquivo</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-muted text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Pesquisa de Logs</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+
                     </div>
                 </div>
-            </nav>
-        </header>*@
+            </div>
+        </header>
     </div>
     <div class="container">
         <main role="main" class="pb-3">
@@ -74,7 +57,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - BenFattoLog.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - BenFattoLog
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
