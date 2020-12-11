@@ -2,7 +2,7 @@
 
 namespace BenFattoLog.BLL
 {
-    public class Class1
-    {
+    public class LogBussiness {
+
     }
 }
