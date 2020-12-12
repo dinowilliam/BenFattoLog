@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BenFattoLog.DAL\BenFattoLog.DAL.csproj" />
     <ProjectReference Include="..\BenFattoLog.Domain\BenFattoLog.Domain.csproj" />
     <ProjectReference Include="..\BenFattoLog.Utils\BenFattoLog.Utils.csproj" />
   </ItemGroup>

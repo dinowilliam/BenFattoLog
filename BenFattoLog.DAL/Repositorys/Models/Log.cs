@@ -10,9 +10,9 @@ namespace BenFattoLog.DAL.Repositorys.Models
     public partial class Log : IEntity {
         public Guid Id { get; set; }
         public IPAddress IpAddress { get; set; }
-        public DateTime? OccurrencieDate { get; set; }
+        public DateTime? OccurrenceeDate { get; set; }
         public string AccessLog { get; set; }
-        public short? HttpRespose { get; set; }
+        public short? HttpResponse { get; set; }
         public int? Port { get; set; }
         public DateTime? AddDate { get; set; }
     }

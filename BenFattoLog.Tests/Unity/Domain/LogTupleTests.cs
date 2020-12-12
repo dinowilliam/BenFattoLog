@@ -13,10 +13,10 @@ namespace BenFattoLog.Tests.Domain {
             var logTuple = new LogTuple();
 
             // Act
-            logTuple.Ip = IPAddress.Parse("0.0.0.0");
+            logTuple.IpAddress = IPAddress.Parse("0.0.0.0");
 
             // Assert
-            Assert.NotEqual(logTuple.Ip, LogTupleTestHelper.Ip);
+            Assert.NotEqual(logTuple.IpAddress, LogTupleTestHelper.Ip);
 
         }
 
@@ -26,10 +26,10 @@ namespace BenFattoLog.Tests.Domain {
             var logTuple = new LogTuple();
 
             // Act
-            logTuple.Ip = IPAddress.Parse("216.239.46.100");
+            logTuple.IpAddress = IPAddress.Parse("216.239.46.100");
 
             //assert
-            Assert.Equal(logTuple.Ip, LogTupleTestHelper.Ip);
+            Assert.Equal(logTuple.IpAddress, LogTupleTestHelper.Ip);
 
         }
 
@@ -38,18 +38,18 @@ namespace BenFattoLog.Tests.Domain {
             // Arrange
             var logTuple = new LogTuple();
             // Act
-            logTuple.Occurrence = DateTime.MinValue;
+            logTuple.OccurrenceeDate = DateTime.MinValue;
             // Assert
-            Assert.NotEqual(logTuple.Occurrence, LogTupleTestHelper.Occurrence);
+            Assert.NotEqual(logTuple.OccurrenceeDate, LogTupleTestHelper.Occurrence);
         }
         [Fact]
         public void IsOcurrencieValid() {
             // Arrange
             var logTuple = new LogTuple();
             // Act
-            logTuple.Occurrence = DateTime.UtcNow;
+            logTuple.OccurrenceeDate = DateTime.UtcNow;
             //assert
-            Assert.Equal(logTuple.Occurrence, LogTupleTestHelper.Occurrence);
+            Assert.Equal(logTuple.OccurrenceeDate, LogTupleTestHelper.Occurrence);
         }
 
     }

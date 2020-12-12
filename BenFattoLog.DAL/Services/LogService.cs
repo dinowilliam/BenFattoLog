@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace BenFattoLog.DAL.Services {
+    using BenFattoLog.DAL.Infra;
     using BenFattoLog.DAL.Infra.Contracts;
     using BenFattoLog.DAL.Repositorys;
     using BenFattoLog.DAL.Repositorys.Models;
@@ -14,32 +15,40 @@ namespace BenFattoLog.DAL.Services {
         IRepository<Log> RepLog { get; set; }
 
         public LogService() {
-            this.RepLog = new LogRepository();
+            var dataContext = new BenFattoLogContext();
+            this.RepLog = new LogRepository(dataContext);
         }
 
         public int Save(LogTuple log) {
 
-            TinyMapper.Bind <LogTuple, Log> ();
-            Log localUser = TinyMapper.Map<Log>(log);
+            TinyMapper.Bind <LogTuple, Log>(config =>
+            {
+                config.Ignore(x => x.IpAddress);
+            });
 
-            return RepLog.Insert(localUser);
+            Log localLog = TinyMapper.Map<Log>(log);
+
+            localLog.IpAddress = log.IpAddress;
+            localLog.AddDate = DateTime.Now;
+
+            return RepLog.Insert(localLog);
         }
 
         public int Update(LogTuple log) {
 
             TinyMapper.Bind<LogTuple, Log>();
-            var localUser = TinyMapper.Map<Log>(log);
+            var localLog = TinyMapper.Map<Log>(log);
 
-            return RepLog.Update(localUser);
+            return RepLog.Update(localLog);
         }
 
         public int Delete(Guid id) {
             int deleteReturn;
 
-            var localUser = RepLog.Get(id);
+            var localLog = RepLog.Get(id);
 
             try {
-                RepLog.Delete(localUser);
+                RepLog.Delete(localLog);
                 deleteReturn = 0;
             }
             catch(Exception) {
@@ -51,22 +60,24 @@ namespace BenFattoLog.DAL.Services {
 
         public IEnumerable<LogTuple> GetAll() {
 
-            var localListUsers = RepLog.List();
+            var localListLog = RepLog.List();
 
             TinyMapper.Bind<LogTuple, Log>();
-            var listlUsers = TinyMapper.Map<List<LogTuple>>(localListUsers);
+            var listLog = TinyMapper.Map<List<LogTuple>>(localListLog);
 
-            return listlUsers;
+            return listLog;
         }
 
         public LogTuple GetById(Guid id) {
 
-            var localUser = RepLog.Get(id);
+            var localLog = RepLog.Get(id);
 
-            TinyMapper.Bind<LogTuple, Log>();
-            var user = TinyMapper.Map<LogTuple>(localUser);
-
-            return user;
+            TinyMapper.Bind<Log, LogTuple> (config => {
+                config.Ignore(x => x.IpAddress);
+            });
+            var log = TinyMapper.Map<LogTuple>(localLog);
+            log.IpAddress = localLog.IpAddress;
+            return log;
 
         }
 

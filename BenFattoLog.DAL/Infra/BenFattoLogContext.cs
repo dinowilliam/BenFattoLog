@@ -34,7 +34,7 @@ namespace BenFattoLog.DAL.Infra {
 
                 entity.Property(e => e.IpAddress).IsRequired();
 
-                entity.Property(e => e.OccurrencieDate).HasColumnType("timestamp with time zone");
+                entity.Property(e => e.OccurrenceeDate).HasColumnType("timestamp with time zone");
             });
 
             OnModelCreatingPartial(modelBuilder);
