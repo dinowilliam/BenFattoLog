@@ -23,7 +23,7 @@ namespace BenFattoLog.UI.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ManualLog()
         {
             return View();
         }

@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-table/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -35,7 +37,7 @@
                                         Logs
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item text-muted text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Entrada de Log Manual</a>
+                                        <a class="dropdown-item text-muted text-dark" asp-area="" asp-controller="Home" asp-action="ManualLog">Entrada de Log Manual</a>
                                         <a class="dropdown-item text-muted text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Importação de Arquivo</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item text-muted text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Pesquisa de Logs</a>
@@ -62,6 +64,11 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.js"></script>
+    <script src="~/lib/tableexport.jquery.plugin//tableExport.min.js"></script>
+    <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="~/lib/bootstrap-table/dist/bootstrap-table-locale-all.min.js"></script>
+    <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
