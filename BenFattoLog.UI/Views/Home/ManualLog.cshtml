@@ -5,8 +5,11 @@
     <div class="card-body">
 
         <div id="toolbar">
-            <button id="remove" class="btn btn-danger" disabled>
-                <i class="fa fa-trash"></i> Delete
+            <button id="add" type="button" class="btn btn-primary btn-success btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa fa-plus"></i> Adicionar
+            </button>
+            <button id="remove" type="button" class="btn btn-danger" disabled>
+                <i class="fa fa-trash"></i> Excluir
             </button>
         </div>
         <table id="table"
@@ -17,10 +20,8 @@
                data-show-fullscreen="true"
                data-show-columns="true"
                data-show-columns-toggle-all="true"
-               data-detail-view="true"
                data-show-export="true"
                data-click-to-select="true"
-               data-detail-formatter="detailFormatter"
                data-minimum-count-columns="2"
                data-show-pagination-switch="true"
                data-pagination="true"
@@ -33,6 +34,27 @@
         </table>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts
 {
     <script src="@Url.Content("~/js/views/home/manual.log.js")"></script>

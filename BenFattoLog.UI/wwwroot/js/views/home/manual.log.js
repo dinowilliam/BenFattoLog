@@ -1,6 +1,8 @@
-﻿var $table = $('#table')
-var $remove = $('#remove')
-var selections = []
+﻿let $table = $("#table");
+let $remove = $("#remove");
+let adicionar = document.querySelector("#add");
+let modalAdicionar = new bootstrap.Modal(document.getElementById('exampleModal'));
+let selections = []
 
 function getIdSelections() {
     return $.map($table.bootstrapTable('getSelections'), function (row) {
@@ -13,14 +15,6 @@ function responseHandler(res) {
         row.state = $.inArray(row.id, selections) !== -1
     })
     return res
-}
-
-function detailFormatter(index, row) {
-    var html = []
-    $.each(row, function (key, value) {
-        html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-    })
-    return html.join('')
 }
 
 function operateFormatter(value, row, index) {
@@ -46,66 +40,38 @@ window.operateEvents = {
     }
 }
 
-function totalTextFormatter(data) {
-    return 'Total'
-}
-
-function totalNameFormatter(data) {
-    return data.length
-}
-
-function totalPriceFormatter(data) {
-    var field = this.field
-    return '$' + data.map(function (row) {
-        return +row[field].substring(1)
-    }).reduce(function (sum, i) {
-        return sum + i
-    }, 0)
-}
 
 function initTable() {
     $table.bootstrapTable('destroy').bootstrapTable({
-        height: 550,
+        height: 750,
         locale: 'pt-BR',
         columns: [
             [{
-                field: 'state',
-                checkbox: true,
-                rowspan: 2,
-                align: 'center',
-                valign: 'middle'
-            }, {
                 title: 'Item ID',
                 field: 'id',
-                rowspan: 2,
+                rowspan: 1,
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                footerFormatter: totalTextFormatter
             }, {
-                title: 'Item Detail',
-                colspan: 3,
-                align: 'center'
-            }],
-            [{
                 field: 'name',
                 title: 'Item Name',
+                rowspan: 1,
                 sortable: true,
-                footerFormatter: totalNameFormatter,
                 align: 'center'
             }, {
                 field: 'price',
                 title: 'Item Price',
+                rowspan: 1,
                 sortable: true,
                 align: 'center',
-                footerFormatter: totalPriceFormatter
             }, {
                 field: 'operate',
                 title: 'Item Operate',
                 align: 'center',
+                rowspan: 1,
                 clickToSelect: false,
                 events: window.operateEvents,
-                formatter: operateFormatter
             }]
         ]
     })
@@ -121,6 +87,7 @@ function initTable() {
     $table.on('all.bs.table', function (e, name, args) {
         console.log(name, args)
     })
+
     $remove.click(function () {
         var ids = getIdSelections()
         $table.bootstrapTable('remove', {
@@ -134,4 +101,10 @@ function initTable() {
 $(function () {
     initTable();
 
+    adicionar.addEventListener('click', function (event) {
+        modalAdicionar.show();
+    })
+
+
 })
+
