@@ -37,19 +37,72 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="manualLogModal" tabindex="-1" aria-labelledby="-->Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="manualLogModalLabel">Cadastro de Log Manual</h5>
+                <button type="button"  id="closeModalTitle" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip01">IP</label>
+                            <input type="text" class="form-control" id="validationTooltip01" value="Mark" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip02">Data da Ocorrência</label>
+                            <input type="text" class="form-control" id="validationTooltip02" value="Otto" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationTooltip04">Verbo HTTP</label>
+                            <select class="custom-select" id="validationTooltip04" required>
+                                <option selected value="">GET</option>
+                                <option value="">POST</option>
+                                <option value="">PUTT</option>
+                            </select>
+                            <div class="invalid-tooltip">
+                                Please select a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip03">Endereço</label>
+                            <input type="text" class="form-control" id="validationTooltip03" required>
+                            <div class="invalid-tooltip">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationTooltip04">Protocólo HTTP</label>
+                            <select class="custom-select" id="validationTooltip04" required>
+                                <option selected value="">HTTP/1.0</option>
+                                <option value="">HTTP/1.1</option>
+                                <option value="">HTTP/2.0</option>
+                            </select>
+                            <div class="invalid-tooltip">
+                                Please select a valid state.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationTooltip05">Porta</label>
+                        <input type="text" class="form-control" id="validationTooltip05" required>
+                        <div class="invalid-tooltip">
+                            Please provide a valid zip.
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="saveModal" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

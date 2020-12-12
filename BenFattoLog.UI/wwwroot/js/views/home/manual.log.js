@@ -1,8 +1,41 @@
 ﻿let $table = $("#table");
 let $remove = $("#remove");
 let adicionar = document.querySelector("#add");
-let modalAdicionar = new bootstrap.Modal(document.getElementById('exampleModal'));
 let selections = []
+
+class manualLogModal {
+
+    constructor(modalId) {
+        this.modal = new bootstrap.Modal(document.getElementById(modalId));
+
+        this.defineButtons();
+        this.bindEvents();
+    }
+
+    defineButtons() {
+        this.closeModalTitle = document.querySelector("#closeModalTitle");
+        this.closeModal = document.querySelector("#closeModal");
+        this.saveModal = document.querySelector("#saveModal");
+    }
+
+    bindEvents() {
+        closeModalTitle.addEventListener('click', (event) => {
+            this.modal.hide();
+        });
+
+        closeModal.addEventListener('click', (event) => {
+            this.modal.hide();
+        });
+    }
+
+    showModal() {
+        this.modal.show();
+    }
+
+    closeModal() {
+        this.modal.hide();
+    }
+}
 
 function getIdSelections() {
     return $.map($table.bootstrapTable('getSelections'), function (row) {
@@ -98,12 +131,15 @@ function initTable() {
     })
 }
 
-$(function () {
+$( () => {
     initTable();
 
+    let manualLog = new manualLogModal('manualLogModal');
+
     adicionar.addEventListener('click', function (event) {
-        modalAdicionar.show();
+        manualLog.showModal();
     })
+
 
 
 })
