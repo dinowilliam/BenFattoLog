@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BenFattoLog.DAL\BenFattoLog.DAL.csproj" />
+    <ProjectReference Include="..\BenFattoLog.Domain\BenFattoLog.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
