@@ -33,6 +33,21 @@ namespace BenFattoLog.DAL.Services {
             return RepLog.Insert(localLog);
         }
 
+        public int AddRange(List<LogTuple> logs) {
+
+            var listLog = logs.Select(a => new Log() {
+                Id = a.Id,
+                IpAddress = a.IpAddress,
+                OccurrenceeDate = a.OccurrenceeDate,
+                AccessLog = a.AccessLog,
+                HttpResponse = a.HttpResponse,
+                Port = a.Port
+
+            }).ToList();
+           
+            return RepLog.AddRange(listLog);
+        }
+
         public int Update(LogTuple log) {
 
             var localLog = new Log {

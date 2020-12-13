@@ -1,8 +1,11 @@
 ﻿using BenFattoLog.API.DTO;
 using BenFattoLog.BLL;
 using BenFattoLog.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -84,6 +87,28 @@ namespace BenFattoLog.API {
             };
 
             return filledResponseDto;
+        }
+
+        public async Task<ResponseDto> GetUpload(List<IFormFile> files) {
+
+            int result = 1;
+
+            foreach (var formFile in files) {
+                if (formFile.Length > 0) {
+
+                    var msFile = new MemoryStream();
+                    await formFile.CopyToAsync(msFile);
+
+                    result = logBusiness.Upload(msFile.ToArray());
+
+                }
+            }
+
+            var response = new ResponseDto {
+                Success = result == 0 ? true : false
+            };
+
+            return await Task.FromResult(response);
         }
 
     }

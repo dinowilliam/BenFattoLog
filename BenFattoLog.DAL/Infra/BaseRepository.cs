@@ -30,6 +30,11 @@ namespace BenFattoLog.DAL.Infra {
             return this._dataContext.SaveChanges();
         }
 
+        public int AddRange(IEnumerable<TEntity> entities) {
+            this._dataContext.Set<TEntity>().AddRange(entities);
+            return this._dataContext.SaveChanges();
+        }
+
         public IList<TEntity> List() {
             return this._dataContext.Set<TEntity>().ToList();
         }

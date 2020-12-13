@@ -1,5 +1,9 @@
 ﻿let $table = $("#table");
-let adicionar = document.querySelector("#add");
+let inputFile = document.getElementById('arquivoLogImportacao');
+let inputLabel = document.getElementById('labelArquivoLogImportacao');
+let spinnersFileInput = document.getElementById('spinnersFileInput');
+let enviar = document.getElementById('enviar');
+
 let selections = []
 
 function cleanFields() {
@@ -21,7 +25,7 @@ function responseHandler(res) {
 }
 
 function dateFormatter(value, row, index) {
-    return moment(value).format('DD/MM/YYYY HH:mm:ss ZZ');
+    return moment(value).format('DD/MM/YYYY HH:mm');
 }
 
 function initTable() {
@@ -80,10 +84,39 @@ $(() => {
 
     initTable();
 
-    let inputFile = document.getElementById('arquivoLogImportacao');
-    let inputLabel = document.getElementById('labelArquivoLogImportacao');
+
     inputFile.addEventListener('change', function () {
         inputLabel.innerHTML = inputFile.files[0].name;
+    })
+
+
+
+    enviar.addEventListener('click', function (event) {
+        cleanFields();
+
+        enviar.disabled = true;
+        spinnersFileInput.classList.remove("d-none");
+
+        const formData = new FormData();
+
+        formData.append('files', inputFile.files[0]);
+
+        fetch('https://localhost:44386/api/log/upload', {
+            method: 'PUT',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result);
+                enviar.disabled = false;
+                spinnersFileInput.classList.add("d-none");
+                $table.bootstrapTable('refresh');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                enviar.disabled = false;
+                spinnersFileInput.classList.add("d-none");
+            });
     })
 
 

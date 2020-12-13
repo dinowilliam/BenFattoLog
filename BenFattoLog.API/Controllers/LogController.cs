@@ -1,8 +1,10 @@
 ﻿using BenFattoLog.API.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -35,11 +37,16 @@ namespace BenFattoLog.API.Controllers
             return await logManipulator.Save(logTuple);
         }
 
-        // DELETE: api/TodoItems/5
         [HttpDelete("{id}")]
         public async Task<ResponseDto> DeleteLogs(Guid id) {
 
             return await logManipulator.Delete(id);
+        }
+
+        [HttpPut("Upload")]
+        public async Task<ResponseDto> OnPostUploadAsync(List<IFormFile> files) {
+
+           return await logManipulator.GetUpload(files); ;
         }
     }
 }

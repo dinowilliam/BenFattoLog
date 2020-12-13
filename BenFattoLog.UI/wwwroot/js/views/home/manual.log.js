@@ -1,5 +1,4 @@
 ﻿let $table = $("#table");
-let $remove = $("#remove");
 let adicionar = document.querySelector("#add");
 let selections = []
 
@@ -128,7 +127,7 @@ function responseHandler(res) {
 }
 
 function dateFormatter(value, row, index) {
-    return moment(value).format('DD/MM/YYYY HH:mm:ss ZZ');
+    return moment(value).format('DD/MM/YYYY HH:mm');
 }
 
 function operateFormatter(value, row, index) {
@@ -252,15 +251,6 @@ function initTable() {
         })
     $table.on('all.bs.table', function (e, name, args) {
         console.log(name, args)
-    })
-
-    $remove.click(function () {
-        var ids = getIdSelections()
-        $table.bootstrapTable('remove', {
-            field: 'id',
-            values: ids
-        })
-        $remove.prop('disabled', true)
     })
 }
 

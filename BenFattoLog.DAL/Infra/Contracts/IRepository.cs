@@ -10,6 +10,7 @@ namespace BenFattoLog.DAL.Infra.Contracts {
         IList<TEntity> List();
         IList<TEntity> List(Expression<Func<TEntity, bool>> expression);
         int Insert(TEntity entity);
+        int AddRange(IEnumerable<TEntity> entities);
         int Update(TEntity entity);
         int Delete(TEntity entity);
         IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> expression);

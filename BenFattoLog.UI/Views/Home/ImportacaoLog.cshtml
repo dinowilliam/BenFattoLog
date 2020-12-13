@@ -5,13 +5,38 @@
     <div class="card-body">
 
         <div id="toolbar">
-            <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" id="arquivoLogImportacao" required>
-                <label id="labelArquivoLogImportacao" class="custom-file-label" for="validatedCustomFile">Escolha o arquivo...</label>
+            <div class="row ml-2">
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="arquivoLogImportacao" required>
+                    <label id="labelArquivoLogImportacao" class="custom-file-label" for="validatedCustomFile">Escolha o arquivo...</label>
+                </div>
             </div>
-            <button id="enviar" type="button" class="btn btn-primary btn-success btn-dark" >
-                <i class="fa fa-plus"></i> Enviar
-            </button>
+            <div class="row ml-2">
+                <button id="enviar" type="button" class="btn btn-primary btn-success btn-dark" id="enviar">
+                    <i class="fa fa-upload"></i> Enviar
+                </button>
+                <div id="spinnersFileInput" class="d-none ml-3">
+                    <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Processando...</span>
+                    </div>
+                    <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Processando...</span>
+                    </div>
+                    <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Processando...</span>
+                    </div>
+                    <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Processando...</span>
+                    </div>
+                    <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Processando...</span>
+                    </div>
+                    <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Processando...</span>
+                    </div>
+                    <span>Processando...</span>
+                </div>
+            </div>
         </div>
         <table id="table"
                data-toolbar="#toolbar"
