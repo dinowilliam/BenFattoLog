@@ -3,6 +3,8 @@ let inputFile = document.getElementById('arquivoLogImportacao');
 let inputLabel = document.getElementById('labelArquivoLogImportacao');
 let spinnersFileInput = document.getElementById('spinnersFileInput');
 let enviar = document.getElementById('enviar');
+let servicePort = 44386;
+let serviceAddress = 'https://localhost:'
 
 let selections = []
 
@@ -32,6 +34,7 @@ function initTable() {
     $table.bootstrapTable('destroy').bootstrapTable({
         height: 750,
         locale: 'pt-BR',
+        url: `${serviceAddress}${servicePort}/api/log`,
         columns: [
             [{
                 title: 'Ip',
@@ -101,7 +104,7 @@ $(() => {
 
         formData.append('files', inputFile.files[0]);
 
-        fetch('https://localhost:44386/api/log/upload', {
+        fetch(`${serviceAddress}${servicePort}/api/log/upload`, {
             method: 'PUT',
             body: formData
         })

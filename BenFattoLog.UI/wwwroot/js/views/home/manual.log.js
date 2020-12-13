@@ -1,6 +1,8 @@
 ﻿let $table = $("#table");
 let adicionar = document.querySelector("#add");
 let selections = []
+let servicePort = 44386;
+let serviceAddress = 'https://localhost:'
 
 class manualLogModal {
 
@@ -41,8 +43,8 @@ class manualLogModal {
                     'port': Number(document.querySelector("#port").value)
                 }
 
-                fetch('https://localhost:44386/api/log', {
-                    method: 'PUT', // or 'POST'
+                fetch(`${serviceAddress}${servicePort}/api/log`, {
+                    method: 'PUT', //
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -172,7 +174,7 @@ window.operateEvents = {
 
             var id = row.id;
 
-            fetch(`https://localhost:44386/api/log/${id}`, {
+            fetch(`${serviceAddress}${servicePort}/api/log/${id}`, {
                 method: 'DELETE', // or 'POST'
             })
                 .then(response => response.json())
@@ -198,6 +200,7 @@ function initTable() {
     $table.bootstrapTable('destroy').bootstrapTable({
         height: 750,
         locale: 'pt-BR',
+        url: `${serviceAddress}${servicePort}/api/log`,
         columns: [
             [{
                 title: 'Ip',

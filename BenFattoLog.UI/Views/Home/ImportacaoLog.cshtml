@@ -7,7 +7,7 @@
         <div id="toolbar">
             <div class="row ml-2">
                 <div class="custom-file mb-3">
-                    <input type="file" class="custom-file-input" id="arquivoLogImportacao" required>
+                    <input type="file" class="custom-file-input" id="arquivoLogImportacao">
                     <label id="labelArquivoLogImportacao" class="custom-file-label" for="validatedCustomFile">Escolha o arquivo...</label>
                 </div>
             </div>
@@ -55,7 +55,6 @@
                data-page-list="[10, 25, 50, 100, all]"
                data-show-footer="true"
                data-side-pagination="server"
-               data-url="https://localhost:44386/api/log"
                data-response-handler="responseHandler">
         </table>
     </div>
