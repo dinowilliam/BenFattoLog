@@ -1,0 +1,42 @@
+﻿<div class="card">
+    <div class="card-header">
+        Importação de Arquivo de Log
+    </div>
+    <div class="card-body">
+
+        <div id="toolbar">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="arquivoLogImportacao" required>
+                <label id="labelArquivoLogImportacao" class="custom-file-label" for="validatedCustomFile">Escolha o arquivo...</label>
+            </div>
+            <button id="enviar" type="button" class="btn btn-primary btn-success btn-dark" >
+                <i class="fa fa-plus"></i> Enviar
+            </button>
+        </div>
+        <table id="table"
+               data-toolbar="#toolbar"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-fullscreen="true"
+               data-show-columns="true"
+               data-show-columns-toggle-all="true"
+               data-show-export="true"
+               data-click-to-select="true"
+               data-minimum-count-columns="2"
+               data-show-pagination-switch="true"
+               data-pagination="true"
+               data-id-field="id"
+               data-page-list="[10, 25, 50, 100, all]"
+               data-show-footer="true"
+               data-side-pagination="server"
+               data-url="https://localhost:44386/api/log"
+               data-response-handler="responseHandler">
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/js/views/home/importacao.log.js")"></script>
+}

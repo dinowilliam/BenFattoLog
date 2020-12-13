@@ -8,6 +8,7 @@ class manualLogModal {
     constructor(modalId) {
         this.modal = new bootstrap.Modal(document.getElementById(modalId));
 
+        this.modalId = modalId;
         this.defineButtons();
         this.bindEvents();
     }
@@ -29,32 +30,59 @@ class manualLogModal {
 
         saveModal.addEventListener('click', (event) => {
 
-            const data = {
-                'id': document.querySelector("#id") && document.querySelector("#id").value ? document.querySelector("#id").value : null,
-                'ipAddress': document.querySelector("#ipAddress").value,
-                'occurrenceeDate': moment(document.querySelector("#occurenceeDate").value, 'DD/MM/YYYY HH:mm').format(),
-                'accessLog': document.querySelector("#httpVerb").value + ' ' + document.querySelector("#accessLog").value + ' ' + document.querySelector("#httpProtocol").value,
-                'httpResponse': Number(document.querySelector("#httpResponse").value),
-                'port': Number(document.querySelector("#port").value)
+            this.saveModal.disabled = true;
+
+            if (this.validateFields()) {
+                const data = {
+                    'id': document.querySelector("#id") && document.querySelector("#id").value ? document.querySelector("#id").value : null,
+                    'ipAddress': document.querySelector("#ipAddress").value,
+                    'occurrenceeDate': moment(document.querySelector("#occurenceeDate").value, 'DD/MM/YYYY HH:mm').format(),
+                    'accessLog': document.querySelector("#httpVerb").value + ' ' + document.querySelector("#accessLog").value + ' ' + document.querySelector("#httpProtocol").value,
+                    'httpResponse': Number(document.querySelector("#httpResponse").value),
+                    'port': Number(document.querySelector("#port").value)
+                }
+
+                fetch('https://localhost:44386/api/log', {
+                    method: 'PUT', // or 'POST'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        $table.bootstrapTable('refresh');
+                        this.modal.hide();
+                        this.saveModal.disabled = false;
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        this.saveModal.disabled = false;
+                    });
+            }
+            else {
+                this.saveModal.disabled = false;
             }
 
-            fetch('https://localhost:44386/api/log', {
-                method: 'PUT', // or 'POST'
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    $table.bootstrapTable('refresh');
-                    this.modal.hide();
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+        });
+    }
+
+    validateFields() {
+        var requiredFields = document.querySelector(`#${this.modalId}`).querySelectorAll("input:not([type=hidden]),select");
+
+        requiredFields.forEach(element => {
+            if (element && element.value) {
+                element.classList.remove("is-invalid");
+                element.classList.add("is-valid");
+            }
+            else {
+                element.classList.remove("is-valid");
+                element.classList.add("is-invalid");
+            }
 
         });
+
+        return document.querySelector(`#${this.modalId}`).querySelectorAll(".is-invalid").length > 0 ? false : true;
     }
 
     showModal() {
@@ -67,6 +95,14 @@ class manualLogModal {
 }
 
 function cleanFields() {
+    var cleanFields = document.querySelector("#manualLogModal").querySelectorAll("input:not([type=hidden]),select");
+
+    cleanFields.forEach(element => {
+
+        element.classList.remove("is-invalid", "is-valid");
+
+    });
+
     document.querySelector("#id").value = "";
     document.querySelector("#ipAddress").value = "";
     document.querySelector("#occurenceeDate").value = moment(new Date()).format('DD/MM/YYYY HH:mm');
@@ -109,12 +145,20 @@ function operateFormatter(value, row, index) {
 window.operateEvents = {
     'click .update': function (e, value, row, index) {
 
+        var cleanFields = document.querySelector("#manualLogModal").querySelectorAll("input:not([type=hidden]),select");
+        cleanFields.forEach(element => {
+            element.classList.remove("is-invalid", "is-valid");
+        });
+
+        var accessLogSring = row.accessLog.replace(/GET|POST|PUT|DELETE|/g, "");
+        accessLogSring = accessLogSring.trim().substring(0, accessLogSring.trim().length - 8);
+
         document.querySelector("#id").value = row.id;
         document.querySelector("#ipAddress").value = row.ipAddress;
         document.querySelector("#occurenceeDate").value = moment(row.occurenceeDate).format('DD/MM/YYYY HH:mm');
         document.querySelector("#httpVerb").value = row.accessLog.substring(0, row.accessLog.indexOf(' '));
-        document.querySelector("#httpProtocol").value = row.accessLog.substring(row.accessLog.trim().length - 8, row.accessLog.trim().length);;
-        document.querySelector("#accessLog").value = row.accessLog;
+        document.querySelector("#httpProtocol").value = row.accessLog.substring(row.accessLog.trim().length - 8, row.accessLog.trim().length);
+        document.querySelector("#accessLog").value = accessLogSring;
         document.querySelector("#httpResponse").value = row.httpResponse;
         document.querySelector("#port").value = row.port;
 
@@ -123,10 +167,30 @@ window.operateEvents = {
 
     },
     'click .remove': function (e, value, row, index) {
-        $table.bootstrapTable('remove', {
-            field: 'id',
-            values: [row.id]
-        })
+
+        if (confirm('Você tem certeza que deseja exlcuir esse registro?')) {
+
+
+            var id = row.id;
+
+            fetch(`https://localhost:44386/api/log/${id}`, {
+                method: 'DELETE', // or 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    $table.bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    })
+
+                    $table.bootstrapTable('refresh');
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
     }
 }
 

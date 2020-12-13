@@ -1,6 +1,7 @@
 ﻿using BenFattoLog.API.DTO;
 using BenFattoLog.BLL;
 using BenFattoLog.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,16 @@ namespace BenFattoLog.API {
                 result = logBusiness.Update(logSave);
 
             }
+
+            var response = new ResponseDto {
+                Success = result == 0 ? true : false
+            };
+
+            return Task.FromResult(response);
+        }
+        public Task<ResponseDto> Delete(Guid id) {
+
+            var result = logBusiness.Delete(id);
 
             var response = new ResponseDto {
                 Success = result == 0 ? true : false

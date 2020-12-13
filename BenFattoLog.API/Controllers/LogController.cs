@@ -34,5 +34,12 @@ namespace BenFattoLog.API.Controllers
 
             return await logManipulator.Save(logTuple);
         }
+
+        // DELETE: api/TodoItems/5
+        [HttpDelete("{id}")]
+        public async Task<ResponseDto> DeleteLogs(Guid id) {
+
+            return await logManipulator.Delete(id);
+        }
     }
 }

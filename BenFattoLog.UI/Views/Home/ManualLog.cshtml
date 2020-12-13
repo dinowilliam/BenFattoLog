@@ -8,9 +8,6 @@
             <button id="add" type="button" class="btn btn-primary btn-success btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fa fa-plus"></i> Adicionar
             </button>
-            <button id="remove" type="button" class="btn btn-danger" disabled>
-                <i class="fa fa-trash"></i> Excluir
-            </button>
         </div>
         <table id="table"
                data-toolbar="#toolbar"
@@ -51,16 +48,10 @@
                     <div class="col-md-6 mb-3">
                         <label for="validationTooltip01">IP</label>
                         <input type="text" class="form-control" id="ipAddress" data-inputmask="'alias': 'ip'">
-                        <div class="valid-tooltip">
-                            O Casmpo IP é necessário!
-                        </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationTooltip02">Data da Ocorrência</label>
                         <input type="text" class="form-control" id="occurenceeDate">
-                        <div class="valid-tooltip">
-                            Looks good!
-                        </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationTooltip04">Verbo HTTP</label>
@@ -70,16 +61,10 @@
                             <option value="PUT">PUT</option>
                             <option value="DELETE">DELETE</option>
                         </select>
-                        <div class="invalid-tooltip">
-                            Please select a valid state.
-                        </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="validationTooltip03">Endereço</label>
                         <input type="text" class="form-control" id="accessLog">
-                        <div class="invalid-tooltip">
-                            Please provide a valid city.
-                        </div>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="validationTooltip04">Protocolo HTTP</label>
@@ -88,23 +73,14 @@
                             <option value="HTTP/1.1">HTTP/1.1</option>
                             <option value="HTTP/2.0">HTTP/2.0</option>
                         </select>
-                        <div class="invalid-tooltip">
-                            Please select a valid state.
-                        </div>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="validationTooltip05">Resposta HTTP</label>
                         <input type="text" class="form-control" id="httpResponse">
-                        <div class="invalid-tooltip">
-                            Informe a Resposta HTTP Correta.
-                        </div>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="validationTooltip05">Porta</label>
                         <input type="text" class="form-control" id="port">
-                        <div class="invalid-tooltip">
-                            Informe a Porta Correta.
-                        </div>
                     </div>
                 </div>
             </div>
