@@ -47,9 +47,10 @@
             </div>
             <div class="modal-body">
                 <div class="form-row">
+                    <input type="hidden" class="form-control" id="id">
                     <div class="col-md-6 mb-3">
                         <label for="validationTooltip01">IP</label>
-                        <input type="text" class="form-control" id="ip" data-inputmask="'alias': 'ip'">
+                        <input type="text" class="form-control" id="ipAddress" data-inputmask="'alias': 'ip'">
                         <div class="valid-tooltip">
                             O Casmpo IP é necessário!
                         </div>
@@ -64,10 +65,10 @@
                     <div class="col-md-3 mb-3">
                         <label for="validationTooltip04">Verbo HTTP</label>
                         <select class="custom-select" id="httpVerb">
-                            <option selected value="">GET</option>
-                            <option value="">POST</option>
-                            <option value="">PUT</option>
-                            <option value="">DELETE</option>
+                            <option selected value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="DELETE">DELETE</option>
                         </select>
                         <div class="invalid-tooltip">
                             Please select a valid state.
@@ -83,9 +84,9 @@
                     <div class="col-md-2 mb-3">
                         <label for="validationTooltip04">Protocolo HTTP</label>
                         <select class="custom-select" id="httpProtocol">
-                            <option selected value="">HTTP/1.0</option>
-                            <option value="">HTTP/1.1</option>
-                            <option value="">HTTP/2.0</option>
+                            <option selected value="HTTP/1.0">HTTP/1.0</option>
+                            <option value="HTTP/1.1">HTTP/1.1</option>
+                            <option value="HTTP/2.0">HTTP/2.0</option>
                         </select>
                         <div class="invalid-tooltip">
                             Please select a valid state.

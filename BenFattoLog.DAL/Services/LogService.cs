@@ -9,7 +9,6 @@ namespace BenFattoLog.DAL.Services {
     using BenFattoLog.DAL.Repositorys.Models;
     using BenFattoLog.Domain.Entities;
     using Nelibur.ObjectMapper;
-    using System.Net;
 
     public class LogService {
 
@@ -22,23 +21,28 @@ namespace BenFattoLog.DAL.Services {
 
         public int Save(LogTuple log) {
 
-            TinyMapper.Bind <LogTuple, Log>(config =>
-            {
-                config.Ignore(x => x.IpAddress);
-            });
-
-            Log localLog = TinyMapper.Map<Log>(log);
-
-            localLog.IpAddress = log.IpAddress;
-            localLog.AddDate = DateTime.Now;
+            var localLog = new Log {
+                Id = log.Id,
+                IpAddress = log.IpAddress,
+                OccurrenceeDate = log.OccurrenceeDate,
+                AccessLog = log.AccessLog,
+                HttpResponse = log.HttpResponse,
+                Port = log.Port,
+            };
 
             return RepLog.Insert(localLog);
         }
 
         public int Update(LogTuple log) {
 
-            TinyMapper.Bind<LogTuple, Log>();
-            var localLog = TinyMapper.Map<Log>(log);
+            var localLog = new Log {
+                Id = log.Id,
+                IpAddress = log.IpAddress,
+                OccurrenceeDate = log.OccurrenceeDate,
+                AccessLog = log.AccessLog,
+                HttpResponse = log.HttpResponse,
+                Port = log.Port,
+            };
 
             return RepLog.Update(localLog);
         }
@@ -52,7 +56,7 @@ namespace BenFattoLog.DAL.Services {
                 RepLog.Delete(localLog);
                 deleteReturn = 0;
             }
-            catch(Exception) {
+            catch (Exception) {
                 deleteReturn = 1;
             }
 
@@ -65,13 +69,12 @@ namespace BenFattoLog.DAL.Services {
 
 
             var listLog = localListLog.Select(a => new LogTuple() {
-                    Id = a.Id,
-                    IpAddress = a.IpAddress,
-                    OccurrenceeDate = a.OccurrenceeDate,
-                    AccessLog = a.AccessLog,
-                    HttpResponse = a.HttpResponse,
-                    Port = a.Port,
-                    AddDate = a.AddDate
+                Id = a.Id,
+                IpAddress = a.IpAddress,
+                OccurrenceeDate = a.OccurrenceeDate,
+                AccessLog = a.AccessLog,
+                HttpResponse = a.HttpResponse,
+                Port = a.Port
 
             }).ToList();
 
@@ -82,7 +85,7 @@ namespace BenFattoLog.DAL.Services {
 
             var localLog = RepLog.Get(id);
 
-            TinyMapper.Bind<Log, LogTuple> (config => {
+            TinyMapper.Bind<Log, LogTuple>(config => {
                 config.Ignore(x => x.IpAddress);
             });
             var log = TinyMapper.Map<LogTuple>(localLog);

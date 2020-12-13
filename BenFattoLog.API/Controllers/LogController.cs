@@ -24,17 +24,15 @@ namespace BenFattoLog.API.Controllers
         }
 
         [HttpGet]
-        public ResponseDto GetLogs()
+        public ResponseTableDto GetLogs()
         {
             return logManipulator.GetAll();
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutLogs(LogTupleDto logTupleDTO) {
+        public async Task<ResponseDto> PutLogs(LogTupleDto logTuple) {
 
-
-
-            return NoContent();
+            return await logManipulator.Save(logTuple);
         }
     }
 }

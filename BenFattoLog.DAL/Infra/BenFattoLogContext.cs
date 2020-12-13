@@ -30,8 +30,6 @@ namespace BenFattoLog.DAL.Infra {
 
                 entity.Property(e => e.AccessLog).HasMaxLength(2048);
 
-                entity.Property(e => e.AddDate).HasColumnType("timestamp with time zone");
-
                 entity.Property(e => e.IpAddress).IsRequired();
 
                 entity.Property(e => e.OccurrenceeDate).HasColumnType("timestamp with time zone");

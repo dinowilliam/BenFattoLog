@@ -30,11 +30,12 @@ class manualLogModal {
         saveModal.addEventListener('click', (event) => {
 
             const data = {
-                'ipAddress': document.querySelector("#ip").value,
-                'occurrenceeDate': document.querySelector("#occurenceeDate").value,
+                'id': document.querySelector("#id") && document.querySelector("#id").value ? document.querySelector("#id").value : null,
+                'ipAddress': document.querySelector("#ipAddress").value,
+                'occurrenceeDate': moment(document.querySelector("#occurenceeDate").value, 'DD/MM/YYYY HH:mm').format(),
                 'accessLog': document.querySelector("#httpVerb").value + ' ' + document.querySelector("#accessLog").value + ' ' + document.querySelector("#httpProtocol").value,
-                'httpResponse': document.querySelector("#httpResponse").value,
-                'port': document.querySelector("#port").value
+                'httpResponse': Number(document.querySelector("#httpResponse").value),
+                'port': Number(document.querySelector("#port").value)
             }
 
             fetch('https://localhost:44386/api/log', {
@@ -46,7 +47,8 @@ class manualLogModal {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);
+                    $table.bootstrapTable('refresh');
+                    this.modal.hide();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -62,6 +64,18 @@ class manualLogModal {
     closeModal() {
         this.modal.hide();
     }
+}
+
+function cleanFields() {
+    document.querySelector("#id").value = "";
+    document.querySelector("#ipAddress").value = "";
+    document.querySelector("#occurenceeDate").value = moment(new Date()).format('DD/MM/YYYY HH:mm');
+    document.getElementById("httpVerb").selectedIndex = 1;
+    document.querySelector("#accessLog").value = "";
+    document.getElementById("httpProtocol").selectedIndex = 1;
+    document.querySelector("#httpResponse").value = "";
+    document.querySelector("#port").value = "";
+
 }
 
 function getIdSelections() {
@@ -83,8 +97,8 @@ function dateFormatter(value, row, index) {
 
 function operateFormatter(value, row, index) {
     return [
-        '<a class="like" href="javascript:void(0)" title="Like">',
-        '<i class="fa fa-heart"></i>',
+        '<a class="update" href="javascript:void(0)" title="Like">',
+        '<i class="fa fa-pen-alt"></i>',
         '</a>  ',
         '<a class="remove" href="javascript:void(0)" title="Remove">',
         '<i class="fa fa-trash"></i>',
@@ -93,8 +107,20 @@ function operateFormatter(value, row, index) {
 }
 
 window.operateEvents = {
-    'click .like': function (e, value, row, index) {
-        alert('You click like action, row: ' + JSON.stringify(row))
+    'click .update': function (e, value, row, index) {
+
+        document.querySelector("#id").value = row.id;
+        document.querySelector("#ipAddress").value = row.ipAddress;
+        document.querySelector("#occurenceeDate").value = moment(row.occurenceeDate).format('DD/MM/YYYY HH:mm');
+        document.querySelector("#httpVerb").value = row.accessLog.substring(0, row.accessLog.indexOf(' '));
+        document.querySelector("#httpProtocol").value = row.accessLog.substring(row.accessLog.trim().length - 8, row.accessLog.trim().length);;
+        document.querySelector("#accessLog").value = row.accessLog;
+        document.querySelector("#httpResponse").value = row.httpResponse;
+        document.querySelector("#port").value = row.port;
+
+        let manualLogUpdate = new manualLogModal('manualLogModal');
+        manualLogUpdate.showModal();
+
     },
     'click .remove': function (e, value, row, index) {
         $table.bootstrapTable('remove', {
@@ -141,6 +167,13 @@ function initTable() {
                 title: 'Porta',
                 align: 'center',
                 rowspan: 1
+            }, {
+                field: 'operate',
+                title: 'Operações',
+                align: 'center',
+                clickToSelect: false,
+                events: window.operateEvents,
+                formatter: operateFormatter
             }]
         ]
     })
@@ -178,20 +211,22 @@ $(() => {
         alias: "datetime"
     });
 
+    $("#httpResponse").inputmask("numeric", { min: 100, max: 599 });
+
     $("#port").inputmask("numeric", { min: 0, max: 65535 });
 
     initTable();
-
     let manualLog = new manualLogModal('manualLogModal');
 
     let modalFocus = document.getElementById('manualLogModal');
-    let inputFocus = document.getElementById('ip');
+    let inputFocus = document.getElementById('ipAddress');
 
     modalFocus.addEventListener('shown.bs.modal', function () {
         inputFocus.focus();
     })
 
     adicionar.addEventListener('click', function (event) {
+        cleanFields();
         manualLog.showModal();
     })
 

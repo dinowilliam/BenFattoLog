@@ -14,6 +14,5 @@ namespace BenFattoLog.DAL.Repositorys.Models
         public string AccessLog { get; set; }
         public short? HttpResponse { get; set; }
         public int? Port { get; set; }
-        public DateTime? AddDate { get; set; }
     }
 }

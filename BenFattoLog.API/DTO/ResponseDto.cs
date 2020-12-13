@@ -5,10 +5,8 @@ using System.Net;
 namespace BenFattoLog.API.DTO
 {
     public class ResponseDto {
-         public int Total { get; set; }
-         public int TotalNotFiltered { get; set; }
-
-        public IEnumerable<LogTupleDto> Rows { get; set; }
+        public bool Success{ get; set; }
+        public IEnumerable<MessageDto> Messages { get; set; }
 
     }
 }
