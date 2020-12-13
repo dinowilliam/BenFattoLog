@@ -26,6 +26,33 @@ class manualLogModal {
         closeModal.addEventListener('click', (event) => {
             this.modal.hide();
         });
+
+        saveModal.addEventListener('click', (event) => {
+
+            const data = {
+                'ipAddress': document.querySelector("#ip").value,
+                'occurrenceeDate': document.querySelector("#occurenceeDate").value,
+                'accessLog': document.querySelector("#httpVerb").value + ' ' + document.querySelector("#accessLog").value + ' ' + document.querySelector("#httpProtocol").value,
+                'httpResponse': document.querySelector("#httpResponse").value,
+                'port': document.querySelector("#port").value
+            }
+
+            fetch('https://localhost:44386/api/log', {
+                method: 'PUT', // or 'POST'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+        });
     }
 
     showModal() {
@@ -48,6 +75,10 @@ function responseHandler(res) {
         row.state = $.inArray(row.id, selections) !== -1
     })
     return res
+}
+
+function dateFormatter(value, row, index) {
+    return moment(value).format('DD/MM/YYYY HH:mm:ss ZZ');
 }
 
 function operateFormatter(value, row, index) {
@@ -80,31 +111,36 @@ function initTable() {
         locale: 'pt-BR',
         columns: [
             [{
-                title: 'Item ID',
-                field: 'id',
+                title: 'Ip',
+                field: 'ipAddress',
                 rowspan: 1,
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
             }, {
-                field: 'name',
-                title: 'Item Name',
+                field: 'occurrenceeDate',
+                title: 'Data da Ocorrência',
                 rowspan: 1,
                 sortable: true,
-                align: 'center'
+                align: 'center',
+                formatter: dateFormatter
             }, {
-                field: 'price',
-                title: 'Item Price',
+                field: 'accessLog',
+                title: 'Log de Acesso',
                 rowspan: 1,
                 sortable: true,
                 align: 'center',
             }, {
-                field: 'operate',
-                title: 'Item Operate',
+                field: 'httpResponse',
+                title: 'Resposta HTTP',
                 align: 'center',
-                rowspan: 1,
-                clickToSelect: false,
-                events: window.operateEvents,
+                rowspan: 1
+
+            }, {
+                field: 'port',
+                title: 'Porta',
+                align: 'center',
+                rowspan: 1
             }]
         ]
     })
@@ -131,10 +167,29 @@ function initTable() {
     })
 }
 
-$( () => {
+$(() => {
+
+    $(":input").inputmask();
+
+    $('#occurenceeDate').inputmask("datetime", {
+        inputFormat: "dd/mm/yyyy HH:MM",
+        placeholder: "DD/MM/AAAA HH:MM",
+        leapday: "-02-29",
+        alias: "datetime"
+    });
+
+    $("#port").inputmask("numeric", { min: 0, max: 65535 });
+
     initTable();
 
     let manualLog = new manualLogModal('manualLogModal');
+
+    let modalFocus = document.getElementById('manualLogModal');
+    let inputFocus = document.getElementById('ip');
+
+    modalFocus.addEventListener('shown.bs.modal', function () {
+        inputFocus.focus();
+    })
 
     adicionar.addEventListener('click', function (event) {
         manualLog.showModal();

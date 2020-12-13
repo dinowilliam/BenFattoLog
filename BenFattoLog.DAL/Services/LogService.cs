@@ -9,6 +9,7 @@ namespace BenFattoLog.DAL.Services {
     using BenFattoLog.DAL.Repositorys.Models;
     using BenFattoLog.Domain.Entities;
     using Nelibur.ObjectMapper;
+    using System.Net;
 
     public class LogService {
 
@@ -62,8 +63,17 @@ namespace BenFattoLog.DAL.Services {
 
             var localListLog = RepLog.List();
 
-            TinyMapper.Bind<LogTuple, Log>();
-            var listLog = TinyMapper.Map<List<LogTuple>>(localListLog);
+
+            var listLog = localListLog.Select(a => new LogTuple() {
+                    Id = a.Id,
+                    IpAddress = a.IpAddress,
+                    OccurrenceeDate = a.OccurrenceeDate,
+                    AccessLog = a.AccessLog,
+                    HttpResponse = a.HttpResponse,
+                    Port = a.Port,
+                    AddDate = a.AddDate
+
+            }).ToList();
 
             return listLog;
         }
