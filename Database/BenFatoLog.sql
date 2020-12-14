@@ -5,7 +5,8 @@
 -- Dumped from database version 13.1 (Debian 13.1-1.pgdg100+1)
 -- Dumped by pg_dump version 13.1
 
--- Started on 2020-12-13 03:21:19
+-- Started on 2020-12-14 02:00:57
+
 -- Database: BenFattoLog
 
 -- DROP DATABASE "BenFattoLog";
@@ -18,6 +19,7 @@ CREATE DATABASE "BenFattoLog"
     LC_CTYPE = 'en_US.utf8'
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
+
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -45,8 +47,7 @@ CREATE TABLE public."Log" (
     "OccurrenceeDate" timestamp with time zone,
     "AccessLog" character varying(2048),
     "HttpResponse" smallint,
-    "Port" integer,
-    "AddDate" timestamp with time zone
+    "Port" integer
 );
 
 
@@ -61,7 +62,7 @@ ALTER TABLE ONLY public."Log"
     ADD CONSTRAINT "Log_pkey" PRIMARY KEY ("Id");
 
 
--- Completed on 2020-12-13 03:21:19
+-- Completed on 2020-12-14 02:00:58
 
 --
 -- PostgreSQL database dump complete
