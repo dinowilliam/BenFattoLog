@@ -44,7 +44,7 @@ namespace BenFattoLog.DAL.Services {
                 Port = a.Port
 
             }).ToList();
-           
+
             return RepLog.AddRange(listLog);
         }
 
@@ -100,24 +100,35 @@ namespace BenFattoLog.DAL.Services {
 
             var localLog = RepLog.Get(id);
 
-            TinyMapper.Bind<Log, LogTuple>(config => {
-                config.Ignore(x => x.IpAddress);
-            });
-            var log = TinyMapper.Map<LogTuple>(localLog);
-            log.IpAddress = localLog.IpAddress;
+            var log = new LogTuple {
+                Id = localLog.Id,
+                IpAddress = localLog.IpAddress,
+                OccurrenceeDate = localLog.OccurrenceeDate,
+                AccessLog = localLog.AccessLog,
+                HttpResponse = localLog.HttpResponse,
+                Port = localLog.Port,
+            };
+
             return log;
 
         }
 
-        /*
-        public IEnumerable<LogTuple> UserFilter(string sex, string email, string name) {
+        public IEnumerable<LogTuple> LogFilter(LogSearch logSearch) {
 
-            var localListUsers = RepLog.Where(m => m.Sex.Contains(sex) && m.Email.Contains(email) && m.Name.Contains(name));
+            var localListLog = RepLog.Where(m => m.IpAddress.Equals(logSearch.IpAddress) && m.OccurrenceeDate >= logSearch.InitialDate && m.OccurrenceeDate <= logSearch.FinalDate && m.AccessLog.Contains(logSearch.UserAgent));
 
-            var listlUsers = TinyMapper.Map<List<LogTuple>>(localListUsers);
+            var listLog = localListLog.Select(a => new LogTuple() {
+                Id = a.Id,
+                IpAddress = a.IpAddress,
+                OccurrenceeDate = a.OccurrenceeDate,
+                AccessLog = a.AccessLog,
+                HttpResponse = a.HttpResponse,
+                Port = a.Port
 
-            return listlUsers;
+            }).ToList();
+
+            return listLog;
         }
-        */
+
     }
 }

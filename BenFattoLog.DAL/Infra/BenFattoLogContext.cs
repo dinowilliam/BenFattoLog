@@ -1,10 +1,13 @@
 ﻿using BenFattoLog.DAL.Repositorys.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
-
 namespace BenFattoLog.DAL.Infra {
     public partial class BenFattoLogContext : DbContext {
+
+        private string connectionString = "Host=127.0.0.1;Database=BenFattoLog;Username=postgres;Password=admin";
+
         public BenFattoLogContext() {
         }
 
@@ -16,7 +19,7 @@ namespace BenFattoLog.DAL.Infra {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             if (!optionsBuilder.IsConfigured) {
-                optionsBuilder.UseNpgsql("Host=127.0.0.1;Database=BenFattoLog;Username=postgres;Password=admin");
+                optionsBuilder.UseNpgsql(connectionString);
             }
         }
 

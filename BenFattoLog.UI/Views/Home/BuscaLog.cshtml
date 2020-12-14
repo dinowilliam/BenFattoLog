@@ -1,20 +1,35 @@
 ﻿<div class="card">
     <div class="card-header">
-        Importação de Arquivo de Log
+        Consulta de Logs
     </div>
     <div class="card-body">
-
-        <div id="toolbar">
-            <div class="row ml-2">
-                <div class="custom-file mb-3">
-                    <input type="file" class="custom-file-input" id="arquivoLogImportacao">
-                    <label id="labelArquivoLogImportacao" class="custom-file-label" for="validatedCustomFile">Escolha o arquivo...</label>
+        <div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="validationTooltip01">IP</label>
+                    <input type="text" class="form-control" id="ipAddress" data-inputmask="'alias': 'ip'" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="validationTooltip02">Data da Inicial</label>
+                    <input type="text" class="form-control" id="initialDate" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="validationTooltip02">Data da Final</label>
+                    <input type="text" class="form-control" id="finalDate" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="validationTooltip03">User-Agent</label>
+                    <input type="text" class="form-control" id="userAgent">
+                </div>
+            </div>
+            <div class="row mt-3 ali">
+                <div class="col-lg-12">
+                    <button id="pesquisar" type="button" class="btn btn-primary float-right">
+                        <i class="fa fa-upload"></i> Pesquisar
+                    </button>
                 </div>
             </div>
             <div class="row ml-2">
-                <button id="enviar" type="button" class="btn btn-primary btn-success btn-dark">
-                    <i class="fa fa-upload"></i> Enviar
-                </button>
                 <div id="spinnersFileInput" class="d-none ml-3">
                     <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
                         <span class="sr-only">Processando...</span>
@@ -34,12 +49,12 @@
                     <div class="spinner-grow  spinner-grow-sm text-primary" role="status">
                         <span class="sr-only">Processando...</span>
                     </div>
-                    <span>Processando...</span>
+                    <span>Pesquisando...</span>
                 </div>
             </div>
         </div>
         <table id="table"
-               data-toolbar="#toolbar"
+               data-search="false"
                data-show-refresh="true"
                data-show-toggle="true"
                data-show-fullscreen="true"
@@ -61,5 +76,5 @@
 
 @section Scripts
 {
-    <script src="@Url.Content("~/js/views/home/importacao.log.js")"></script>
+    <script src="@Url.Content("~/js/views/home/consulta.log.js")"></script>
 }

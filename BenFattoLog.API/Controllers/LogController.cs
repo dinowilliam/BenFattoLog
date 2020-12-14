@@ -31,6 +31,11 @@ namespace BenFattoLog.API.Controllers
             return logManipulator.GetAll();
         }
 
+        [HttpPost("Search")]
+        public ResponseTableDto GetLogsSearch(LogSearchDto logSearch) {
+            return logManipulator.LogFilter(logSearch);
+        }
+
         [HttpPut]
         public async Task<ResponseDto> PutLogs(LogTupleDto logTuple) {
 

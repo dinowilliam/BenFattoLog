@@ -89,6 +89,36 @@ namespace BenFattoLog.API {
             return filledResponseDto;
         }
 
+        public ResponseTableDto LogFilter(LogSearchDto logSearch) {
+
+            var logSearchLocal = new LogSearch() {
+                IpAddress = logSearch.IpAddress,
+                InitialDate = logSearch.InitialDate,
+                FinalDate = logSearch.FinalDate,
+                UserAgent = logSearch.UserAgent,
+
+            };
+
+            var allList = logBusiness.LogFilter(logSearchLocal);
+
+            var localLog = allList.Select(a => new LogTupleDto() {
+                Id = a.Id,
+                IpAddress = a.IpAddress,
+                OccurrenceeDate = a.OccurrenceeDate,
+                AccessLog = a.AccessLog,
+                HttpResponse = a.HttpResponse,
+                Port = a.Port
+            }).ToList();
+
+            var filledResponseDto = new ResponseTableDto {
+                Total = localLog.Count,
+                TotalNotFiltered = localLog.Count,
+                Rows = localLog.ToArray()
+            };
+
+            return filledResponseDto;
+        }
+
         public async Task<ResponseDto> GetUpload(List<IFormFile> files) {
 
             int result = 1;

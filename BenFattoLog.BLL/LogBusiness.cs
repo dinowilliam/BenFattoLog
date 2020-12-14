@@ -24,6 +24,9 @@ namespace BenFattoLog.BLL {
         public IEnumerable<LogTuple> GetAll() {
             return logService.GetAll();
         }
+        public IEnumerable<LogTuple> LogFilter(LogSearch logSearch) {
+            return logService.LogFilter(logSearch);
+        }
         public LogTuple GetById(Guid id) {
             return logService.GetById(id);
         }
@@ -45,7 +48,7 @@ namespace BenFattoLog.BLL {
                 newLogTuple.Id = Guid.NewGuid();
                 newLogTuple.IpAddress = IPAddress.Parse(item.Split()[0]);
                 newLogTuple.OccurrenceeDate = ParseDateTimeLinq(item.Split()[3].Replace("[", "") + item.Split()[4].Replace("]", ""));
-                newLogTuple.AccessLog = item.Split()[5].Replace("\"", "") + item.Split()[6] + item.Split()[7].Replace("\"", "");
+                newLogTuple.AccessLog = item.Split()[5].Replace("\"", "") + " " + item.Split()[6] + " " + item.Split()[7].Replace("\"", "");
                 newLogTuple.HttpResponse = ParseShortLinq(item.Split()[8].Replace("-", ""));
                 newLogTuple.Port = ParseIntLinq(item.Split()[9].Replace("-", ""));
 
@@ -60,7 +63,7 @@ namespace BenFattoLog.BLL {
             DateTime dateParse;
 
             var format = "dd/MMM/yyyy:HH:mm:sszzz";
-            dateParse = DateTime.ParseExact(dateToParse, format, provider );
+            dateParse = DateTime.ParseExact(dateToParse, format, provider);
 
             return dateParse;
         }
@@ -80,9 +83,6 @@ namespace BenFattoLog.BLL {
             return value;
         }
 
-        //public IEnumerable<LogTuple> UserFilter(string sex, string email, string name) {
-        //    return logService.LogFilter(sex, email, name);
-        //}
     }
 
 }

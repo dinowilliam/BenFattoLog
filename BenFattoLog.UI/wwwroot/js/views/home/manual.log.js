@@ -161,7 +161,7 @@ window.operateEvents = {
         document.querySelector("#httpProtocol").value = row.accessLog.substring(row.accessLog.trim().length - 8, row.accessLog.trim().length);
         document.querySelector("#accessLog").value = accessLogSring;
         document.querySelector("#httpResponse").value = row.httpResponse;
-        document.querySelector("#port").value = row.port;
+        document.querySelector("#port").value = row.port != null ? row.port : "";
 
         let manualLogUpdate = new manualLogModal('manualLogModal');
         manualLogUpdate.showModal();
