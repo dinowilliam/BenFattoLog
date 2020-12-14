@@ -35,7 +35,7 @@ Este arquivo README tem por objetivo auxiliar na utilização do projeto.
 
 #### Porta do projeto WebApi 
    
-   Caso de seja necessário mudar a porta do projeto WebApi BenFattoLog.API, o projeto BenFattoLog.UI sera afetado pos os arquivos javascript utilizam a porta e o endereço local para acessar o serviço.
+   Caso seja necessário mudar a porta do projeto WebApi BenFattoLog.API, o projeto BenFattoLog.UI sera afetado pos os arquivos javascript utilizam a porta e o endereço local para acessar o serviço.
    Para resolver esse problema basta trocar as variaveis serviceAddress e servicePort para os respectivos novos valores nos seguintes arquivos:
    * consulta.log.js - localizado em BenFattoLog\BenFattoLog.UI\wwwroot\js\views\home
    * importacao.log.js - localizado em BenFattoLog\BenFattoLog.UI\wwwroot\js\views\home
