@@ -15,7 +15,7 @@ function cleanFields() {
 
 
 function validateFields() {
-    var requiredFields = document.querySelectorAll("input[required]");
+    var requiredFields = document.querySelectorAll(".required-val");
 
     requiredFields.forEach(element => {
         if (element && element.value) {
