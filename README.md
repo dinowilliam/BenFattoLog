@@ -8,6 +8,7 @@ Este arquivo README tem por objetivo auxiliar na utilização do projeto.
   A solution foi desenvolvida utilizando Visual Studio 2019 Community, consiste em 7 Projetos, sendo 2  de Startup
   - BenFattoLog.API
   - BenFattoLog.UI
+  
   Os dois devem rodar ao mesmo tempo a partir do Visual Studio
 
 ### Script Banco de Dados
@@ -18,9 +19,11 @@ Este arquivo README tem por objetivo auxiliar na utilização do projeto.
   A string de conexão se encontra no arquivo da classe BenFattoLogContext no projeto BenFattoLog.DAL na pasta Infra
 
   A partir do diretório:
+    
     * BenFattoLog/BenFattoLog.DAL/Infra/BenFattoLogContext.cs
 
   A partir do Solution Explorer:
+    
     * Solution BenFattoLog/Infra/BenFattoLog.DAL/Infra/BenFattoLogContext.cs
 
 
