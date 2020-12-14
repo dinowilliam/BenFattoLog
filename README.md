@@ -4,9 +4,9 @@ Este é o arquivo README para auxiliar na utilização do projeto.
 
 ## Configurações da Solution
 
-Script Banco de Dados
+###Script Banco de Dados
 
-String de Conexão
+####String de Conexão
    A string de conexão caso seja necessário mudar se encontra no arquivo da classe BenFattoLogContext no projeto BenFattoLog.DAL na pasta Infra
 
   A partir do diretório:
@@ -23,13 +23,13 @@ String de Conexão
                     |--BenFattoLogContext.cs
 
 
-Rodando Postegre no Docker
+####Rodando Postegre no Docker
 
  - docker run -d -e POSTGRES_USER=user -e POSTGRES_PASSWORD=admin --name db-my -p 5432:5432  --restart=always postgres
  - Configure o pgAdmin4 para acessar 127.0.0.1:5432
   
 
-Porta do projeto WebApi 
+####Porta do projeto WebApi 
 
 ## Sobre o Desenvolvimento
 
