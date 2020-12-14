@@ -1,3 +1,4 @@
+using BenFattoLog.BLL;
 using BenFattoLog.Domain.Entities;
 using BenFattoLog.Utils;
 using System;
@@ -40,16 +41,16 @@ namespace BenFattoLog.Tests.Domain {
             // Act
             logTuple.OccurrenceeDate = DateTime.MinValue;
             // Assert
-            Assert.NotEqual(logTuple.OccurrenceeDate, LogTupleTestHelper.Occurrence);
+            Assert.NotEqual(logTuple.OccurrenceeDate, LogTupleTestHelper.OccurrenceeInvalid);
         }
         [Fact]
         public void IsOcurrencieValid() {
             // Arrange
             var logTuple = new LogTuple();
             // Act
-            logTuple.OccurrenceeDate = DateTime.UtcNow;
+            logTuple.OccurrenceeDate = new DateTime(2020, 12, 1, 0, 0, 0);
             //assert
-            Assert.Equal(logTuple.OccurrenceeDate, LogTupleTestHelper.Occurrence);
+            Assert.Equal(logTuple.OccurrenceeDate, LogTupleTestHelper.OccurrenceeValid);
         }
 
     }

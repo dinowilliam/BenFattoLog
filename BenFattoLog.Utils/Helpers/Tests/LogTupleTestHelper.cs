@@ -10,9 +10,15 @@ namespace BenFattoLog.Utils {
             }
         }
 
-        public static DateTime Occurrence {
+        public static DateTime OccurrenceeInvalid {
             get {
                 return DateTime.UtcNow;
+            }
+        }
+
+        public static DateTime OccurrenceeValid {
+            get {
+                return new DateTime(2020, 12, 1, 0, 0, 0);
             }
         }
 
