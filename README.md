@@ -4,23 +4,23 @@ Este é o arquivo README para auxiliar na utilização do projeto.
 
 ## Configurações da Solution
 
+### A Solution
+  A solution foi desenvolvida utilizando Visual Studio 2019 Community
+  A solution consiste de 7 Projetos, sendo que 2 são de Startup
+  - BenFattoLog.API
+  - BenFattoLog.UI
+  Os dois devem rodar ao mesmo tempo a partir do Visual Studio
+
 ### Script Banco de Dados
 
 #### String de Conexão
-   A string de conexão caso seja necessário mudar se encontra no arquivo da classe BenFattoLogContext no projeto BenFattoLog.DAL na pasta Infra
+  A string de conexão caso seja necessário mudar se encontra no arquivo da classe BenFattoLogContext no projeto BenFattoLog.DAL na pasta Infra
 
   A partir do diretório:
-        BenFattoLog
-                |--BenFattoLog.DAL
-                    |--Infra
-                        |--BenFattoLogContext.cs
+    * BenFattoLog/BenFattoLog.DAL/Infra/BenFattoLogContext.cs
 
   A partir do Solution Explorer:
-    Solution BenFattoLog
-        |--Infra    
-            |--BenFattoLog.DAL
-                |--Infra 
-                    |--BenFattoLogContext.cs
+    * Solution BenFattoLog/Infra/BenFattoLog.DAL/Infra/BenFattoLogContext.cs
 
 
 #### Rodando Postegre no Docker
@@ -30,6 +30,7 @@ Este é o arquivo README para auxiliar na utilização do projeto.
   
 
 #### Porta do projeto WebApi 
+   
 
 ## Sobre o Desenvolvimento
 
