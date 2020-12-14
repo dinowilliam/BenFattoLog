@@ -41,11 +41,9 @@ Este arquivo README tem por objetivo auxiliar na utilização do projeto.
    * importacao.log.js - localizado em BenFattoLog\BenFattoLog.UI\wwwroot\js\views\home
    * manual.log.js - localizado em BenFattoLog\BenFattoLog.UI\wwwroot\js\views\home   
 
-## Sobre o Desenvolvimento
-
-Second section content.
 
 ## Padrões Utilizados
 
 - O Front-End foi desenvolvido em .NET Core MVC
+- Foram utilizados Bootstrap, JavaScript, AJAX(Fetch Api), JQuery, HTML5, CSS3
 - Foi utilizada um simplificação do padrão DDD
