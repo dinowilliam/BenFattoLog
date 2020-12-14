@@ -5,13 +5,14 @@ Este é o arquivo README para auxiliar na utilização do projeto.
 ## Configurações da Solution
 
 ### A Solution
-  A solution foi desenvolvida utilizando Visual Studio 2019 Community
-  A solution consiste de 7 Projetos, sendo que 2 são de Startup
+  A solution foi desenvolvida utilizando Visual Studio 2019 Community, consiste de 7 Projetos, sendo que 2 são de Startup
   - BenFattoLog.API
   - BenFattoLog.UI
   Os dois devem rodar ao mesmo tempo a partir do Visual Studio
 
 ### Script Banco de Dados
+  
+  O script do banco de dados postgreSQL encontra-se na pasta BenFattoLog/Database/BenFattoLog.sql
 
 #### String de Conexão
   A string de conexão caso seja necessário mudar se encontra no arquivo da classe BenFattoLogContext no projeto BenFattoLog.DAL na pasta Infra
@@ -31,6 +32,11 @@ Este é o arquivo README para auxiliar na utilização do projeto.
 
 #### Porta do projeto WebApi 
    
+   Em caso de ser necessário mudar a porta do projeto WebApi BenFattoLog.API, o projeto BenFattoLog.UI sera afetado pos os arquivos javascript utilizar a porta e o endereço local para acessar o serviço.
+   Para resolver esse problema basta trocar as variaveis serviceAddress e servicePort para os respectivos novos valores (caso seja necessário) nos seguintes arquivos:
+   * consulta.log.js - localizado em BenFattoLog\BenFattoLog.UI\wwwroot\js\views\home
+   * importacao.log.js - localizado em BenFattoLog\BenFattoLog.UI\wwwroot\js\views\home
+   * manual.log.js - localizado em BenFattoLog\BenFattoLog.UI\wwwroot\js\views\home   
 
 ## Sobre o Desenvolvimento
 
