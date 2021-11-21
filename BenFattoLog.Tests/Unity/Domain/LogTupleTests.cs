@@ -11,7 +11,7 @@ namespace BenFattoLog.Tests.Domain {
         [Fact]
         public void IsIPInvalid() {
             // Arrange
-            var logTuple = new LogTuple();
+            var logTuple = new Log();
 
             // Act
             logTuple.IpAddress = IPAddress.Parse("0.0.0.0");
@@ -24,7 +24,7 @@ namespace BenFattoLog.Tests.Domain {
         [Fact]
         public void IsIPValid() {
             // Arrange
-            var logTuple = new LogTuple();
+            var logTuple = new Log();
 
             // Act
             logTuple.IpAddress = IPAddress.Parse("216.239.46.100");
@@ -37,7 +37,7 @@ namespace BenFattoLog.Tests.Domain {
         [Fact]
         public void IsOccurencieInvalid() {
             // Arrange
-            var logTuple = new LogTuple();
+            var logTuple = new Log();
             // Act
             logTuple.OccurrenceeDate = DateTime.MinValue;
             // Assert
@@ -46,7 +46,7 @@ namespace BenFattoLog.Tests.Domain {
         [Fact]
         public void IsOcurrencieValid() {
             // Arrange
-            var logTuple = new LogTuple();
+            var logTuple = new Log();
             // Act
             logTuple.OccurrenceeDate = new DateTime(2020, 12, 1, 0, 0, 0);
             //assert

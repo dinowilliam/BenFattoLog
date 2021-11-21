@@ -11,7 +11,7 @@ namespace BenFattoLog.Tests.Domain {
         [Fact]
         public void IsLogServiceInsertingTrue() {
             // Arrange
-            var logTuple = new LogTuple();
+            var logTuple = new Log();
             var logService = new LogService();
 
             logTuple.Id = Guid.NewGuid();

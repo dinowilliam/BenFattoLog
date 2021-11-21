@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 
-namespace BenFattoLog.Domain.Entities {
+namespace BenFattoLog.Application.DTO{
     public class LogSearch {
-
         public LogSearch() { }
 
         public IPAddress IpAddress { get; set; }

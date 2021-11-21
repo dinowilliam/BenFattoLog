@@ -1,12 +1,12 @@
-﻿using BenFattoLog.DAL.Infra.Contracts;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net;
 
 #nullable disable
 
-namespace BenFattoLog.DAL.Repositorys.Models
-{
+namespace BenFattoLog.DAL.Repositorys.Models {
+
+    using BenFattoLog.DAL.Infra.Contracts;
+
     public partial class Log : IEntity {
         public Guid Id { get; set; }
         public IPAddress IpAddress { get; set; }

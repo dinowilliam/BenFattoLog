@@ -9,9 +9,5 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BenFattoLog.BLL\BenFattoLog.BLL.csproj" />
-  </ItemGroup>
-
 
 </Project>

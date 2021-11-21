@@ -2,8 +2,8 @@
 using System.Net;
 
 namespace BenFattoLog.Domain.Entities {
-    public class LogTuple {
-        public LogTuple(IPAddress ip, DateTime occurrencee, string accesslog, short httpresponse, int port) {
+    public class Log {
+        public Log(IPAddress ip, DateTime occurrencee, string accesslog, short httpresponse, int port) {
             IpAddress = ip;
             OccurrenceeDate = occurrencee;
             AccessLog = accesslog;
@@ -11,7 +11,7 @@ namespace BenFattoLog.Domain.Entities {
             Port = port;
         }
 
-        public LogTuple() {
+        public Log() {
         }
 
         public void Update(IPAddress ip, DateTime occurrencee, string accesslog, short httpresponse, int port) {
