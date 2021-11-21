@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace BenFattoLog.Utils {
+namespace BenFattoLog.Utils.Helpers.Tests {
     public static class LogTupleTestHelper {
 
         public static IPAddress Ip {

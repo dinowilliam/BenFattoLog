@@ -2,11 +2,12 @@
 
 #nullable disable
 namespace BenFattoLog.DAL.Infra.Contexts {
+
     using BenFattoLog.DAL.Repositorys.Models;
 
     public partial class BenFattoLogCommandsContext : DbContext {
                 
-        public BenFattoLogCommandsContext(DbContextOptions<MicroservicesSpikeCommandsContext> options)
+        public BenFattoLogCommandsContext(DbContextOptions<BenFattoLogCommandsContext> options)
             : base(options) {
         }
 
@@ -20,9 +21,9 @@ namespace BenFattoLog.DAL.Infra.Contexts {
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Description).HasMaxLength(2048);
+                entity.Property(e => e.AccessLog).HasMaxLength(2048);
 
-                entity.Property(e => e.Title).IsRequired();
+                entity.Property(e => e.IpAddress).IsRequired();
 
                 entity.Property(e => e.OccurrenceeDate).HasColumnType("timestamp with time zone");
             });

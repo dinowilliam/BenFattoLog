@@ -1,11 +1,11 @@
-using BenFattoLog.BLL;
+
 using BenFattoLog.Domain.Entities;
-using BenFattoLog.Utils;
 using System;
 using System.Net;
 using Xunit;
 
-namespace BenFattoLog.Tests.Domain {
+namespace BenFattoLog.Tests.Domain
+{
     public class LogTupleTests {
 
         [Fact]

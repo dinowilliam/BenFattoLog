@@ -1,12 +1,13 @@
-﻿using MicroservicesSpike.DAL.Infra;
-using MicroservicesSpike.DAL.Infra.Contexts;
-using MicroservicesSpike.DAL.Infra.Contracts;
-using MicroservicesSpike.DAL.Repositorys.Models;
+﻿namespace BenFattoLog.DAL.Repositorys {
+    
+    using BenFattoLog.DAL.Infra;
+    using BenFattoLog.DAL.Infra.Contexts;
+    using BenFattoLog.DAL.Infra.Contracts;
+    using BenFattoLog.DAL.Repositorys.Models;
 
-namespace MicroservicesSpike.DAL.Repositorys {
-    public class LogRepositoryCommands : BaseRepositoryCommands<LogPersistance, MicroservicesSpikeCommandsContext>, IRepositoryCommands<LogPersistance>
+    public class LogRepositoryCommands : BaseRepositoryCommands<LogPersistance, BenFattoLogCommandsContext>, IRepositoryCommands<LogPersistance>
     {
-        public LogRepositoryCommands(MicroservicesSpikeCommandsContext dataContext) : base(dataContext) {
+        public LogRepositoryCommands(BenFattoLogCommandsContext dataContext) : base(dataContext) {
         }
     }
 

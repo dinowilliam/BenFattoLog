@@ -1,12 +1,13 @@
-using BenFattoLog.API.Converters.Json;
 using System;
 using System.Net;
 using System.Text.Json.Serialization;
 
-namespace BenFattoLog.API.DTO
-{
-    public class LogTupleDto
-    {
+namespace BenFattoLog.Application.DTO {
+    
+    using BenFattoLog.Utils.Converters.Json;
+
+    public class LogDTO {
+        
         public Guid? Id { get; set; }
         [JsonConverter(typeof(IPAddressConverter))]
         public IPAddress IpAddress { get; set; }
@@ -14,5 +15,6 @@ namespace BenFattoLog.API.DTO
         public string AccessLog { get; set; }
         public short? HttpResponse { get; set; }
         public int? Port { get; set; }
+
     }
 }

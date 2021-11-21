@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace BenFattoLog.API.Converters.Json {
+namespace BenFattoLog.Utils.Converters.Json {
     class IPAddressConverter : JsonConverter<IPAddress> {
         public override bool CanConvert(Type objectType) {
             return (objectType == typeof(IPAddress));

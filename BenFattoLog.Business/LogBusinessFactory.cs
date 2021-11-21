@@ -1,7 +1,11 @@
-﻿namespace BenFattoLog.Business {
+﻿using System;
+using System.Net;
+
+namespace BenFattoLog.Business {
 
     using BenFattoLog.Business.Contracts;
     using BenFattoLog.Domain.Entities;
+    using BenFattoLog.Domain.Entities.Contracts;    
 
     public class LogBusinessFactory : ILogBusinessFactory {
         
@@ -9,9 +13,9 @@
             
         }
 
-        public Log getLog() {
+        public ILog createLog(IPAddress ip, DateTime occurrencee, string accesslog, short httpresponse, int port) {
 
-            return new Log();
+            return new Log(ip, occurrencee, accesslog, httpresponse, port);
 
         }
     }

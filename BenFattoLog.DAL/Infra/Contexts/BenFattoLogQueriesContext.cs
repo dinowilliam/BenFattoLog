@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 #nullable disable
-namespace BenFatto.DAL.Infra.Contexts {
+namespace BenFattoLog.DAL.Infra.Contexts {
+    
+    using BenFattoLog.DAL.Repositorys.Models;
 
-    using BenFatto.DAL.Repositorys.Models;
-
-    public partial class BenFattoQueriesContext : DbContext {
+    public partial class BenFattoLogQueriesContext : DbContext {
                 
-        public BenFattoQueriesContext(DbContextOptions<MicroservicesSpikeQueriesContext> options)
+        public BenFattoLogQueriesContext(DbContextOptions<BenFattoLogQueriesContext> options)
             : base(options) {
         }
 
@@ -21,9 +21,9 @@ namespace BenFatto.DAL.Infra.Contexts {
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Description).HasMaxLength(2048);
+                entity.Property(e => e.AccessLog).HasMaxLength(2048);
 
-                entity.Property(e => e.Title).IsRequired();
+                entity.Property(e => e.IpAddress).IsRequired();
 
                 entity.Property(e => e.OccurrenceeDate).HasColumnType("timestamp with time zone");
             });

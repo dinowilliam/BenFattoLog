@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MicroservicesSpike.DAL.Infra.Contracts {
+namespace BenFattoLog.DAL.Infra.Contracts {
     public interface IRepositoryCommands<TEntity> where TEntity : class, IEntity {
         
         int Insert(TEntity entity);

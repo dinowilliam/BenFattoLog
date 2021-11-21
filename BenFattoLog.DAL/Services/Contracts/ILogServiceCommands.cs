@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace BenFattoLog.DAL.Services.Contracts
-{
+namespace BenFattoLog.DAL.Services.Contracts {
+
+    using BenFattoLog.DAL.Repositorys.Models;
+
     public interface ILogServiceCommands  {
-        public int Save(LogMessage log);        
-        public int Delete(LogMessage log);
-        public int AddRange(List<LogMessage> logs);
+        public int Save(LogPersistance log);        
+        public int Delete(LogPersistance log);
+        public int AddRange(List<LogPersistance> logs);
     }
 }

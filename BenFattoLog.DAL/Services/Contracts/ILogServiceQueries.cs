@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace BenFattoLog.DAL.Services.Contracts {
 
-    using BenFattoLog.Domain.Entities;
+    using BenFattoLog.DAL.Repositorys.Models;
 
     public interface ILogServiceQueries    {        
-        public IEnumerable<LogMessage> GetAll();
-        public LogMessage GetById(Guid id);
-        public IEnumerable<LogMessage> LogFilter(LogSearch logSearch);
+        public IEnumerable<LogPersistance> GetAll();
+        public LogPersistance GetById(Guid id);
+        public IEnumerable<LogPersistance> LogFilter(LogSearch logSearch);
     }
 }

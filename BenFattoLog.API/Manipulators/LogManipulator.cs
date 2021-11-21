@@ -1,20 +1,22 @@
-﻿using BenFattoLog.API.DTO;
-using BenFattoLog.BLL;
-using BenFattoLog.Domain.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BenFattoLog.API {
+namespace BenFattoLog.API
+{
+
+    using BenFattoLog.API.DTO;
+    using BenFattoLog.Application;
+
     public class LogManipulator {
 
-        LogBusiness logBusiness { get; set; }
+        LogApplication logApplication { get; set; }
+
         public LogManipulator() {
-            this.logBusiness = new LogBusiness();
+            this.logApplication = new LogApplication();
         }
 
         public Task<ResponseDto> Save(LogTupleDto log) {

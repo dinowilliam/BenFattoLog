@@ -1,8 +1,11 @@
-﻿namespace BenFattoLog.Business.Contracts {
+﻿using System;
+using System.Net;
 
-    using BenFattoLog.Domain.Entities;
+namespace BenFattoLog.Business.Contracts {
+
+    using BenFattoLog.Domain.Entities.Contracts;    
 
     internal interface ILogBusinessFactory {
-        Log getLog();
+        ILog createLog(IPAddress ip, DateTime occurrencee, string accesslog, short httpresponse, int port);
     }
 }

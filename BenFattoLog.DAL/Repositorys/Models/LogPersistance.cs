@@ -7,7 +7,7 @@ namespace BenFattoLog.DAL.Repositorys.Models {
 
     using BenFattoLog.DAL.Infra.Contracts;
 
-    public partial class Log : IEntity {
+    public partial class LogPersistance : IEntity {
         public Guid Id { get; set; }
         public IPAddress IpAddress { get; set; }
         public DateTime? OccurrenceeDate { get; set; }

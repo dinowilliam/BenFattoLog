@@ -2,7 +2,10 @@
 using System.Net;
 
 namespace BenFattoLog.Domain.Entities {
-    public class Log {
+
+    using BenFattoLog.Domain.Entities.Contracts;
+
+    public class Log : ILog {
         public Log(IPAddress ip, DateTime occurrencee, string accesslog, short httpresponse, int port) {
             IpAddress = ip;
             OccurrenceeDate = occurrencee;

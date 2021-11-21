@@ -9,7 +9,6 @@ namespace BenFattoLog.DAL.Services {
     using BenFattoLog.DAL.Repositorys;
     using BenFattoLog.DAL.Repositorys.Models;
     using BenFattoLog.DAL.Services.Contracts;
-    using BenFattoLog.Domain.Entities;    
 
     public class LogServiceCommands : ILogServiceCommands   {
 
@@ -17,42 +16,35 @@ namespace BenFattoLog.DAL.Services {
         
         IRepositoryCommands<LogPersistance> logPersistanceCommands { get; set; }
 
-        public LogServiceCommands(MicroservicesSpikeCommandsContext context) {
+        public LogServiceCommands(BenFattoLogCommandsContext context) {
             this.context = context;
             this.logPersistanceCommands = new LogRepositoryCommands(this.context);
         }             
         
-        public int Save(LogMessage log) {
+        public int Save(LogPersistance log) {            
 
-            TinyMapper.Bind<LogMessage, LogPersistance>();
-            var localLog = TinyMapper.Map<LogPersistance>(log);
-
-            if (localLog.Id == Guid.Empty ){
-                localLog.Id = Guid.NewGuid();
-                return logPersistanceCommands.Insert(localLog);
+            if (log.Id == Guid.Empty ){
+                log.Id = Guid.NewGuid();
+                return logPersistanceCommands.Insert(log);
             }
             else {
-                return logPersistanceCommands.Update(localLog);
+                return logPersistanceCommands.Update(log);
             }
             
         }
 
-        public int AddRange(List<LogMessage> logs) {
+        public int AddRange(List<LogPersistance> logs) {
+            
 
-            TinyMapper.Bind<List<LogMessage>, List<LogPersistance>>();
-            var listLog = TinyMapper.Map<List<LogPersistance>>(logs);
-
-            return logPersistanceCommands.AddRange(listLog);
+            return logPersistanceCommands.AddRange(logs);
         }
         
-        public int Delete(LogMessage log) {
+        public int Delete(LogPersistance log) {
             
             int deleteReturn;            
 
-            try {
-                TinyMapper.Bind<LogMessage, LogPersistance>();
-                var localLog = TinyMapper.Map<LogPersistance>(log);
-                logPersistanceCommands.Delete(localLog);
+            try {                
+                logPersistanceCommands.Delete(log);
                 deleteReturn = 0;
             }
             catch (Exception) {

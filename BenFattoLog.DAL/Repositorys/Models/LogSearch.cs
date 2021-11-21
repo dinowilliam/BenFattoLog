@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 
-namespace BenFattoLog.Application.DTO{
+namespace BenFattoLog.DAL.Repositorys.Models {
     public class LogSearch {
-        public LogSearch() { }
-
+        public LogSearch() { }        
         public IPAddress IpAddress { get; set; }
         public DateTime? InitialDate { get; set; }
         public DateTime? FinalDate { get; set; }

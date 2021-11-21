@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BenFattoLog.Business\BenFattoLog.Business.csproj" />
+    <ProjectReference Include="..\BenFattoLog.DAL\BenFattoLog.DAL.csproj" />
+    <ProjectReference Include="..\BenFattoLog.Utils\BenFattoLog.Utils.csproj" />
   </ItemGroup>
 
 </Project>
