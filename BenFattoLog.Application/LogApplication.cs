@@ -6,8 +6,8 @@ using System.IO;
 namespace BenFattoLog.Application {
 
     using BenFattoLog.Application.Contracts;
+    using BenFattoLog.Application.DTO;
     using BenFattoLog.DAL.Services.Contracts;
-    using BenFattoLog.Domain.Entities;
 
     public class LogApplication : ILogApplication  {
         
@@ -19,7 +19,7 @@ namespace BenFattoLog.Application {
             this.logServiceQueries = logServiceQueries;
         }
 
-        public int Save(LogMessage log) {
+        public int Save(LogDTO log) {
             return logServiceCommands.Save(log);
         }
         
@@ -29,13 +29,13 @@ namespace BenFattoLog.Application {
 
             return logServiceCommands.Delete(localLog);
         }
-        public IEnumerable<LogMessage> GetAll() {
+        public IEnumerable<LogDTO> GetAll() {
             return logServiceQueries.GetAll();
         }
-        public IEnumerable<LogMessage> LogFilter(LogSearch logSearch) {
+        public IEnumerable<LogDTO> LogFilter(LogSearchDT logSearch) {
             return logServiceQueries.LogFilter(logSearch);
         }
-        public LogMessage GetById(Guid id) {
+        public LogDTO GetById(Guid id) {
             return logServiceQueries.GetById(id);
         }
         public int Upload(byte[] file) {
@@ -48,11 +48,11 @@ namespace BenFattoLog.Application {
                 }
             }
 
-            var listLog = new List<LogMessage>();
+            var listLog = new List<LogDTO>();
 
             foreach (string item in stringList) {
 
-                var newLogTuple = new LogMessage();
+                var newLogTuple = new LogDTO();
                 newLogTuple.Id = Guid.NewGuid();
                 newLogTuple.Title = item.Split()[0];
                 newLogTuple.OccurrenceeDate = ParseDateTimeLinq(item.Split()[3].Replace("[", "") + item.Split()[4].Replace("]", ""));

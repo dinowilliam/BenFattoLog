@@ -3,6 +3,9 @@ using System.Net;
 using System.Text.Json.Serialization;
 
 namespace BenFattoLog.Application.DTO {
+
+    using BenFattoLog.Utils.Converters.Json;
+
     public class LogSearchDTO {
         public LogSearchDTO() { }
 

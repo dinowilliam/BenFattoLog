@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.Net;
 
-namespace BenFattoLog.API.DTO
+namespace BenFattoLog.Application.DTO
 {
-    public class ResponseTableDto {
+    public class ResponseTableDTO {
         public int Total { get; set; }
         public int TotalNotFiltered { get; set; }
-        public IEnumerable<LogTupleDto> Rows { get; set; }
+        public IEnumerable<LogDTO> Rows { get; set; }
 
     }
 }
