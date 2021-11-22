@@ -1,4 +1,4 @@
-﻿using BenFattoLog.Application.DTO;
+﻿using BenFattoLog.API.Manipulators.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -6,20 +6,22 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BenFattoLog.API.Controllers
-{
+namespace BenFattoLog.API.Controllers {
+
+    using BenFattoLog.Application.DTO;
+
     [ApiController]
     [Route("api/[controller]")]
     public class LogController : ControllerBase
     {
 
         private readonly ILogger<LogController> _logger;
-        private LogManipulator logManipulator;
+        private readonly ILogManipulator logManipulator;
 
-        public LogController(ILogger<LogController> logger)
+        public LogController(ILogger<LogController> logger, ILogManipulator logManipulator)
         {
             _logger = logger;
-            logManipulator = new LogManipulator();
+            this.logManipulator = logManipulator;
         }
 
         [HttpGet]

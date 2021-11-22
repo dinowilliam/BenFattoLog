@@ -6,12 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace BenFattoLog.API {
-    
-    using BenFattoLog.Application;
+
+    using BenFattoLog.API.Manipulators.Contracts;
     using BenFattoLog.Application.Contracts;
     using BenFattoLog.Application.DTO;
 
-    public class LogManipulator {
+    public class LogManipulator : ILogManipulator {
 
         private readonly ILogApplication logApplication;
 

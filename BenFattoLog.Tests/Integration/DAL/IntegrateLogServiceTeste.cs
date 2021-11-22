@@ -1,32 +1,36 @@
-using BenFattoLog.DAL.Services;
-using BenFattoLog.Domain.Entities;
-using BenFattoLog.Utils;
 using System;
 using System.Net;
+using Moq;
 using Xunit;
 
 namespace BenFattoLog.Tests.Domain {
-    public class IntegrateLogServiceTests {
+    
+    using BenFattoLog.DAL.Repositorys.Models;
+    using BenFattoLog.DAL.Services.Contracts;    
+
+    public class IntegrateLogServiceTests {        
 
         [Fact]
-        public void IsLogServiceInsertingTrue() {
-            // Arrange
-            var logTuple = new Log();
-            var logService = new LogService();
+        public void LogService_IsInserting_True() {
 
-            logTuple.Id = Guid.NewGuid();
-            logTuple.IpAddress = IPAddress.Parse("215.35.134.34");
-            logTuple.OccurrenceeDate = DateTime.UtcNow;
-            logTuple.AccessLog = "GET /~oswinds/publications.html HTTP/1.0";
-            logTuple.HttpResponse = 404;
-            logTuple.Port = 48966;
+            // Arrange
+            var log = new LogPersistance();            
+            var logServiceQueries = new Mock<ILogServiceQueries>();
+
+            log.Id = Guid.NewGuid();
+            log.IpAddress = IPAddress.Parse("215.35.134.34");
+            log.OccurrenceeDate = DateTime.UtcNow;
+            log.AccessLog = "GET /~oswinds/publications.html HTTP/1.0";
+            log.HttpResponse = 404;
+            log.Port = 48966;
 
             // Act
-            logService.Save(logTuple);
-            var retorno = logService.GetById(logTuple.Id);
+            logServiceQueries.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(log);
+
+            var retorno = logServiceQueries.Object.GetById(log.Id);                 
 
             // Assert
-            Assert.Equal(logTuple.Id, retorno.Id);
+            Assert.Equal(log.Id, retorno.Id);
 
         }
 
