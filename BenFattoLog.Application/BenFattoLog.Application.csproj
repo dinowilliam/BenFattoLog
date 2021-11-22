@@ -14,4 +14,9 @@
     <ProjectReference Include="..\BenFattoLog.Utils\BenFattoLog.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validation\" />
+    <Folder Include="Sanitization\" />
+  </ItemGroup>
+
 </Project>

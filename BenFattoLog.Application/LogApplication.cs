@@ -7,20 +7,28 @@ namespace BenFattoLog.Application {
 
     using BenFattoLog.Application.Contracts;
     using BenFattoLog.Application.DTO;
+    using BenFattoLog.Application.Mapping;
     using BenFattoLog.DAL.Services.Contracts;
+    using System.Net;
 
     public class LogApplication : ILogApplication  {
         
         private readonly ILogServiceCommands logServiceCommands;
         private readonly ILogServiceQueries logServiceQueries;
+
+        private LogMappingFactory logMappingFactory;
+        private LogSearchMappingFactory logSearchMappingFactory;
         public LogApplication(ILogServiceCommands logServiceCommands, ILogServiceQueries logServiceQueries) {
 
             this.logServiceCommands = logServiceCommands;
             this.logServiceQueries = logServiceQueries;
+            this.logMappingFactory = new LogMappingFactory();
+            this.logSearchMappingFactory = new LogSearchMappingFactory();
         }
-
+        
         public int Save(LogDTO log) {
-            return logServiceCommands.Save(log);
+            
+            return logServiceCommands.Save(logMappingFactory.ConvertLog(log));
         }
         
         public int Delete(Guid id) {
@@ -30,13 +38,13 @@ namespace BenFattoLog.Application {
             return logServiceCommands.Delete(localLog);
         }
         public IEnumerable<LogDTO> GetAll() {
-            return logServiceQueries.GetAll();
+            return logMappingFactory.ConvertLog(logServiceQueries.GetAll());
         }
-        public IEnumerable<LogDTO> LogFilter(LogSearchDT logSearch) {
-            return logServiceQueries.LogFilter(logSearch);
+        public IEnumerable<LogDTO> LogFilter(LogSearchDTO logSearch) {
+            return logMappingFactory.ConvertLog(logServiceQueries.LogFilter(logSearchMappingFactory.ConvertLogSearch(logSearch)));
         }
         public LogDTO GetById(Guid id) {
-            return logServiceQueries.GetById(id);
+            return logMappingFactory.ConvertLog(logServiceQueries.GetById(id));
         }
         public int Upload(byte[] file) {
             var stringList = new List<string>();
@@ -52,18 +60,18 @@ namespace BenFattoLog.Application {
 
             foreach (string item in stringList) {
 
-                var newLogTuple = new LogDTO();
-                newLogTuple.Id = Guid.NewGuid();
-                newLogTuple.Title = item.Split()[0];
-                newLogTuple.OccurrenceeDate = ParseDateTimeLinq(item.Split()[3].Replace("[", "") + item.Split()[4].Replace("]", ""));
-                newLogTuple.Description = item.Split()[5].Replace("\"", "") + " " + item.Split()[6] + " " + item.Split()[7].Replace("\"", "");
-                newLogTuple.Source = item.Split()[8].Replace("-", "");
+                var newLogDTO = new LogDTO();
+                newLogDTO.Id = Guid.NewGuid();
+                newLogDTO.IpAddress = IPAddress.Parse(item.Split()[0]);
+                newLogDTO.OccurrenceeDate = ParseDateTimeLinq(item.Split()[3].Replace("[", "") + item.Split()[4].Replace("]", ""));
+                newLogDTO.AccessLog = item.Split()[5].Replace("\"", "") + " " + item.Split()[6] + " " + item.Split()[7].Replace("\"", "");
+                newLogDTO.Port = Convert.ToInt32(item.Split()[8].Replace("-", ""));
                 
 
-                listLog.Add(newLogTuple);
+                listLog.Add(newLogDTO);
             }
 
-            return logServiceCommands.AddRange(listLog); ;
+            return logServiceCommands.AddRange(logMappingFactory.ConvertLog(listLog)); 
         }
 
         public DateTime ParseDateTimeLinq(string dateToParse) {

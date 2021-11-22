@@ -1,5 +1,5 @@
-﻿namespace BenFattoLog.API.DTO {
-    public class MessageDto {
+﻿namespace BenFattoLog.Application.DTO {
+    public class MessageDTO {
 
         public int Code { get; set; }
         public string Message { get; set;  }

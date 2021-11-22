@@ -5,75 +5,47 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BenFattoLog.API
-{
-
-    using BenFattoLog.API.DTO;
+namespace BenFattoLog.API {
+    
     using BenFattoLog.Application;
+    using BenFattoLog.Application.Contracts;
+    using BenFattoLog.Application.DTO;
 
     public class LogManipulator {
 
-        LogApplication logApplication { get; set; }
+        private readonly ILogApplication logApplication;
 
-        public LogManipulator() {
-            this.logApplication = new LogApplication();
+        public LogManipulator(ILogApplication logApplication) {
+            this.logApplication = logApplication;
         }
 
-        public Task<ResponseDto> Save(LogTupleDto log) {
-            int result;
+        public Task<ResponseDTO> Save(LogDTO log) {
+            int result;                                        
+            
+            result = logApplication.Save(log);
 
-            if (log.Id == null) {
-                var logSave = new LogTuple() {
-                    Id = Guid.NewGuid(),
-                    IpAddress = log.IpAddress,
-                    OccurrenceeDate = log.OccurrenceeDate,
-                    AccessLog = log.AccessLog,
-                    HttpResponse = log.HttpResponse,
-                    Port = log.Port
-
-                };
-
-                result = logBusiness.Save(logSave);
-
-
-            }
-            else{
-                var logSave = new LogTuple() {
-                    Id = log.Id.Value,
-                    IpAddress = log.IpAddress,
-                    OccurrenceeDate = log.OccurrenceeDate,
-                    AccessLog = log.AccessLog,
-                    HttpResponse = log.HttpResponse,
-                    Port = log.Port
-
-                };
-
-                result = logBusiness.Update(logSave);
-
-            }
-
-            var response = new ResponseDto {
+            var response = new ResponseDTO {
                 Success = result == 0 ? true : false
             };
 
             return Task.FromResult(response);
         }
-        public Task<ResponseDto> Delete(Guid id) {
+        public Task<ResponseDTO> Delete(Guid id) {
 
-            var result = logBusiness.Delete(id);
+            var result = logApplication.Delete(id);
 
-            var response = new ResponseDto {
+            var response = new ResponseDTO {
                 Success = result == 0 ? true : false
             };
 
             return Task.FromResult(response);
         }
 
-        public ResponseTableDto GetAll() {
+        public ResponseTableDTO GetAll() {
 
-            var allList = logBusiness.GetAll();
+            var allList = logApplication.GetAll();
 
-            var localLog = allList.Select(a => new LogTupleDto() {
+            var localLog = allList.Select(a => new LogDTO() {
                 Id = a.Id,
                 IpAddress = a.IpAddress,
                 OccurrenceeDate = a.OccurrenceeDate,
@@ -82,7 +54,7 @@ namespace BenFattoLog.API
                 Port = a.Port
             }).ToList();
 
-            var filledResponseDto = new ResponseTableDto {
+            var filledResponseDto = new ResponseTableDTO {
                 Total = localLog.Count,
                 TotalNotFiltered = localLog.Count,
                 Rows = localLog.ToArray()
@@ -91,9 +63,9 @@ namespace BenFattoLog.API
             return filledResponseDto;
         }
 
-        public ResponseTableDto LogFilter(LogSearchDto logSearch) {
+        public ResponseTableDTO LogFilter(LogSearchDTO logSearch) {
 
-            var logSearchLocal = new LogSearch() {
+            var logSearchLocal = new LogSearchDTO() {
                 IpAddress = logSearch.IpAddress,
                 InitialDate = logSearch.InitialDate,
                 FinalDate = logSearch.FinalDate,
@@ -101,9 +73,9 @@ namespace BenFattoLog.API
 
             };
 
-            var allList = logBusiness.LogFilter(logSearchLocal);
+            var allList = logApplication.LogFilter(logSearchLocal);
 
-            var localLog = allList.Select(a => new LogTupleDto() {
+            var localLog = allList.Select(a => new LogDTO() {
                 Id = a.Id,
                 IpAddress = a.IpAddress,
                 OccurrenceeDate = a.OccurrenceeDate,
@@ -112,7 +84,7 @@ namespace BenFattoLog.API
                 Port = a.Port
             }).ToList();
 
-            var filledResponseDto = new ResponseTableDto {
+            var filledResponseDto = new ResponseTableDTO {
                 Total = localLog.Count,
                 TotalNotFiltered = localLog.Count,
                 Rows = localLog.ToArray()
@@ -121,7 +93,7 @@ namespace BenFattoLog.API
             return filledResponseDto;
         }
 
-        public async Task<ResponseDto> GetUpload(List<IFormFile> files) {
+        public async Task<ResponseDTO> GetUpload(List<IFormFile> files) {
 
             int result = 1;
 
@@ -131,12 +103,12 @@ namespace BenFattoLog.API
                     var msFile = new MemoryStream();
                     await formFile.CopyToAsync(msFile);
 
-                    result = logBusiness.Upload(msFile.ToArray());
+                    result = logApplication.Upload(msFile.ToArray());
 
                 }
             }
 
-            var response = new ResponseDto {
+            var response = new ResponseDTO {
                 Success = result == 0 ? true : false
             };
 

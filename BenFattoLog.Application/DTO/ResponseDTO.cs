@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace BenFattoLog.API.DTO
+namespace BenFattoLog.Application.DTO
 {
-    public class ResponseDto {
+    public class ResponseDTO {
         public bool Success{ get; set; }
-        public IEnumerable<MessageDto> Messages { get; set; }
+        public IEnumerable<MessageDTO> Messages { get; set; }
 
     }
 }

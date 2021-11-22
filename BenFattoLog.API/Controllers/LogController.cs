@@ -1,12 +1,9 @@
-﻿using BenFattoLog.API.DTO;
+﻿using BenFattoLog.Application.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace BenFattoLog.API.Controllers
@@ -26,30 +23,30 @@ namespace BenFattoLog.API.Controllers
         }
 
         [HttpGet]
-        public ResponseTableDto GetLogs()
+        public ResponseTableDTO GetLogs()
         {
             return logManipulator.GetAll();
         }
 
         [HttpPost("Search")]
-        public ResponseTableDto GetLogsSearch(LogSearchDto logSearch) {
+        public ResponseTableDTO GetLogsSearch(LogSearchDTO logSearch) {
             return logManipulator.LogFilter(logSearch);
         }
 
         [HttpPut]
-        public async Task<ResponseDto> PutLogs(LogTupleDto logTuple) {
+        public async Task<ResponseDTO> PutLogs(LogDTO logDTO) {
 
-            return await logManipulator.Save(logTuple);
+            return await logManipulator.Save(logDTO);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ResponseDto> DeleteLogs(Guid id) {
+        public async Task<ResponseDTO> DeleteLogs(Guid id) {
 
             return await logManipulator.Delete(id);
         }
 
         [HttpPut("Upload")]
-        public async Task<ResponseDto> OnPostUploadAsync(List<IFormFile> files) {
+        public async Task<ResponseDTO> OnPostUploadAsync(List<IFormFile> files) {
 
            return await logManipulator.GetUpload(files); ;
         }
