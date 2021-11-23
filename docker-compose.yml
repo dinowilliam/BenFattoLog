@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  benfattolog.ui:
+    image: ${DOCKER_REGISTRY-}benfattologui
+    build:
+      context: .
+      dockerfile: BenFattoLog.UI/Dockerfile
+
+  benfattolog.api:
+    image: ${DOCKER_REGISTRY-}benfattologapi
+    build:
+      context: .
+      dockerfile: BenFattoLog.API/Dockerfile
+  
+  sqldata:
+    image: postgres
+    build:
+      context: .
+      dockerfile: BenFattoLog.DAL/Dockerfile
+    ports:
+      - "5433:5433"

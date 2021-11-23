@@ -1,18 +1,19 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BenFattoLog.API
-{
+namespace BenFattoLog.API {
+
+    using BenFattoLog.API.Manipulators.Contracts;
+    using BenFattoLog.Application;
+    using BenFattoLog.Application.Contracts;
+    using BenFattoLog.DAL.Infra.Contexts;
+    using BenFattoLog.DAL.Services;
+    using BenFattoLog.DAL.Services.Contracts;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -39,6 +40,17 @@ namespace BenFattoLog.API
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
+
+            services.AddDbContext<BenFattoLogQueriesContext>(options =>
+              options.UseNpgsql(Configuration.GetConnectionString("ApiDatabase")));
+
+            services.AddDbContext<BenFattoLogCommandsContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("ApiDatabase")));
+
+            services.AddScoped<ILogServiceCommands, LogServiceCommands>();
+            services.AddScoped<ILogServiceQueries, LogServiceQueries>();
+            services.AddScoped<ILogApplication, LogApplication>();
+            services.AddScoped<ILogManipulator, LogManipulator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
